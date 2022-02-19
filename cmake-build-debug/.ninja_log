@@ -1,0 +1,11 @@
+# ninja log v5
+0	20	1645294626782484159	build.ninja	5b15074327191794
+420	530	1645286603866785877	dsl	2982a7c908b6dfc9
+597	708	1645294146568476323	build/compiler/pupupu	e364695fc8124dbc
+2	478	1645294421399629360	build/compiler/CMakeFiles/pupupu.dir/main.cpp.o	cddba2640b75d42e
+0	420	1645286603754784904	CMakeFiles/dsl.dir/main.cpp.o	6293434720115fd8
+1	529	1645294628982470697	build/compiler/CMakeFiles/pupupu.dir/main.cpp.o	5970048cd2acc25b
+1	516	1645294724681868839	build/compiler/CMakeFiles/pupupu.dir/main.cpp.o	5970048cd2acc25b
+2	800	1645294724965867011	build/compiler/token/CMakeFiles/token.dir/token.cpp.o	ea455c40c6bdf659
+800	818	1645294724981866908	build/compiler/token/libtoken.a	fab41acc9fa25d82
+818	942	1645294725105866110	build/compiler/pupupu	a34108fe9dcd9997
