@@ -7,67 +7,68 @@
 
 using namespace std;
 
-class IdToken : public Token {
+class IdToken : public IToken {
 public:
     explicit IdToken(const string& value)
-        : Token(TokenType::IDENTIFIER, value){}
+        : IToken(TokenType::IDENTIFIER, value){}
 
     explicit IdToken(string&& value)
-            : Token(TokenType::IDENTIFIER, move(value)){}
+            : IToken(TokenType::IDENTIFIER, move(value)){}
 
-    [[nodiscard]] string GetType() const override {
+    [[nodiscard]] string GetTypeAsString() const override {
         return "identifier";
     }
+
 };
 
-class KeyToken : public Token {
+class KeyToken : public IToken {
 public:
     explicit KeyToken(const string& value)
-            : Token(TokenType::KEYWORD, value){}
+            : IToken(TokenType::KEYWORD, value){}
 
     explicit KeyToken(string&& value)
-    : Token(TokenType::KEYWORD, move(value)){}
+    : IToken(TokenType::KEYWORD, move(value)){}
 
-    [[nodiscard]] string GetType() const override {
+    [[nodiscard]] string GetTypeAsString() const override {
         return "keyword";
     }
 };
 
-class SepToken : public Token {
+class SepToken : public IToken {
 public:
     explicit SepToken(const string& value)
-            : Token(TokenType::SEPARATOR, value){}
+            : IToken(TokenType::SEPARATOR, value){}
 
     explicit SepToken(string&& value)
-    : Token(TokenType::SEPARATOR, move(value)){}
+    : IToken(TokenType::SEPARATOR, move(value)){}
 
-    [[nodiscard]] string GetType() const override {
+    [[nodiscard]] string GetTypeAsString() const override {
         return "separator";
     }
 };
 
-class OpToken : public Token {
+class OpToken : public IToken {
 public:
     explicit OpToken(const string& value)
-            : Token(TokenType::OPERATOR, value){}
+            : IToken(TokenType::OPERATOR, value){}
 
     explicit OpToken(string&& value)
-    : Token(TokenType::OPERATOR, move(value)){}
+    : IToken(TokenType::OPERATOR, move(value)){}
 
-    [[nodiscard]] string GetType() const override {
+    [[nodiscard]] string GetTypeAsString() const override {
         return "operator";
     }
 };
 
-class LitToken : public Token {
+class LitToken : public IToken {
 public:
     explicit LitToken(const string& value)
-            : Token(TokenType::LITERAL, value){}
+            : IToken(TokenType::LITERAL, value){}
 
     explicit LitToken(string&& value)
-    : Token(TokenType::LITERAL, move(value)){}
+    : IToken(TokenType::LITERAL, move(value)){}
 
-    [[nodiscard]] string GetType() const override {
+    [[nodiscard]] string GetTypeAsString() const override {
         return "literal";
     }
 };
@@ -103,6 +104,6 @@ TokenPtr MakeToken(TokenType type, std::string&& value) {
 }
 
 ostream& operator<<(ostream& out, const TokenPtr& token) {
-    out << "[" << token->GetType() << ", " << token->GetValue() << "]";
+    out << "[" << token->GetTypeAsString() << ", " << token->GetValue() << "]";
     return out;
 }

@@ -4,8 +4,6 @@ project(token)
 
 set(CMAKE_CXX_STANDARD 17)
 
-
-
 set(
         SOURCES
         token.cpp

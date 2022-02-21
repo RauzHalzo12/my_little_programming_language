@@ -1,0 +1,72 @@
+//
+// Created by ortur on 20.02.2022.
+//
+#include "lexer.h"
+#include "rules.h"
+#include "token_recognizer.h"
+
+#include <string_view>
+
+using namespace std;
+
+
+deque<TokenPtr> SplitLineIntoTokens(const string& line, const grammar::Rules& rules) {
+    deque<TokenPtr> result;
+
+    TokenRecognizer recognizer(rules);
+
+    for (size_t l = 0; l < line.size();) {
+        size_t r = l+1;
+        for (; r <= line.size(); r++) {
+            auto subs = line.substr(l, r - l);
+            auto state = recognizer.TryIdentify(subs);
+
+            if (state == RecognitionResult::NONE) {
+                auto final_descision = recognizer.GetLastIdentified();
+
+                if (final_descision != TokenType::UNDEFINED && final_descision != TokenType::SEPARATOR) {
+                    result.push_back(move(
+                            MakeToken(final_descision,
+                                      move(string(line.begin()+l, line.begin() + r-1)))
+                    ));
+                }
+
+                l = r - 1;
+
+                recognizer.Reset();
+                break;
+
+            } else {
+
+                if (r == line.size()) {
+                    auto final_descision = recognizer.GetCurrentMatch();
+
+                    if (final_descision != TokenType::UNDEFINED && final_descision != TokenType::SEPARATOR) {
+                        result.push_back(move(MakeToken(final_descision, subs)));
+                    }
+
+                    l = r;
+                    break;
+                }
+
+                continue;
+            }
+
+        }
+    }
+
+    return result;
+}
+
+
+deque<TokenPtr> SplitTextIntoTokens(istream& in, const grammar::Rules& rules) {
+    deque<TokenPtr> result;
+
+    for (string line; getline(in, line);) {
+        for (auto& token : SplitLineIntoTokens(line, rules)) {
+            result.push_back(move(token));
+        }
+    }
+
+    return result;
+}

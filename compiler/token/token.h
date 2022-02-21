@@ -9,37 +9,40 @@
 #include <memory>
 #include <utility>
 
-enum class TokenType {
-    IDENTIFIER,
-    KEYWORD,
-    SEPARATOR,
-    OPERATOR,
-    LITERAL,
-};
-class Token {
-public:
-    Token (TokenType type, const std::string& value)
-            : type_(type), value_(value){}
+ enum class TokenType {
+     IDENTIFIER,
+     KEYWORD,
+     SEPARATOR,
+     OPERATOR,
+     LITERAL,
+     UNDEFINED
+ };
 
-    Token (TokenType type, std::string&& value)
-        : type_(type), value_(move(value)){}
+ class IToken {
+ public:
+     IToken(TokenType type, const std::string& value)
+             : type_(type), value_(value) {}
 
-    [[nodiscard]] virtual std::string GetType() const = 0;
+     IToken(TokenType type, std::string &&value)
+             : type_(type), value_(move(value)) {}
 
-    [[nodiscard]] std::string GetValue() const {return value_;};
 
-    virtual ~Token() = default;
+     [[nodiscard]] virtual std::string GetTypeAsString() const = 0;
+     [[nodiscard]] std::string_view GetValue() const { return value_; };
+     [[nodiscard]] TokenType GetType() const {return type_;}
 
-protected:
-    TokenType type_;
-    const std::string value_;
-};
+     virtual ~IToken() = default;
 
-using TokenPtr = std::unique_ptr<Token>;
+ protected:
+     TokenType type_;
+     const std::string value_;
+ };
 
-TokenPtr MakeToken(TokenType type, const std::string& value);
-TokenPtr MakeToken(TokenType type, std::string&& value);
+ using TokenPtr = std::unique_ptr<IToken>;
 
-std::ostream& operator<<(std::ostream& out, const TokenPtr& token);
+ TokenPtr MakeToken(TokenType type, const std::string& value);
+ TokenPtr MakeToken(TokenType type, std::string&& value);
+
+ std::ostream& operator<<(std::ostream& out, const TokenPtr& token);
 
 #endif //MY_LITTLE_PROGRAMMING_LANGUAGE_TOKEN_H

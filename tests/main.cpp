@@ -4,14 +4,6 @@
 
 #include <iostream>
 
-#include "token.h"
-#include "lexer.h"
-#include "rules.h"
-
-
-using namespace std;
-
 int main() {
-
     return 0;
 }

@@ -2,9 +2,13 @@
 /home/ortur/dsl/cmake-build-debug/CMakeFiles/edit_cache.dir
 /home/ortur/dsl/cmake-build-debug/build/compiler/CMakeFiles/rebuild_cache.dir
 /home/ortur/dsl/cmake-build-debug/build/compiler/CMakeFiles/edit_cache.dir
-/home/ortur/dsl/cmake-build-debug/build/compiler/CMakeFiles/pupupu.dir
+/home/ortur/dsl/cmake-build-debug/build/compiler/CMakeFiles/compiler.dir
 /home/ortur/dsl/cmake-build-debug/build/compiler/token/CMakeFiles/rebuild_cache.dir
 /home/ortur/dsl/cmake-build-debug/build/compiler/token/CMakeFiles/edit_cache.dir
 /home/ortur/dsl/cmake-build-debug/build/compiler/token/CMakeFiles/token.dir
 /home/ortur/dsl/cmake-build-debug/build/compiler/lexer/CMakeFiles/rebuild_cache.dir
 /home/ortur/dsl/cmake-build-debug/build/compiler/lexer/CMakeFiles/edit_cache.dir
+/home/ortur/dsl/cmake-build-debug/build/compiler/lexer/CMakeFiles/lexer.dir
+/home/ortur/dsl/cmake-build-debug/build/tests/CMakeFiles/rebuild_cache.dir
+/home/ortur/dsl/cmake-build-debug/build/tests/CMakeFiles/edit_cache.dir
+/home/ortur/dsl/cmake-build-debug/build/tests/CMakeFiles/compiler_tests.dir

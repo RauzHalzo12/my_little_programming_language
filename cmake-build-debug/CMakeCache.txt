@@ -14,6 +14,12 @@
 # EXTERNAL cache entries
 ########################
 
+//The directory containing a CMake configuration file for ../token.
+../token_DIR:PATH=../token_DIR-NOTFOUND
+
+//The directory containing a CMake configuration file for ..token.
+..token_DIR:PATH=..token_DIR-NOTFOUND
+
 //Path to a program.
 CMAKE_ADDR2LINE:FILEPATH=/usr/bin/addr2line
 
@@ -270,6 +276,24 @@ Project_IS_TOP_LEVEL:STATIC=ON
 Project_SOURCE_DIR:STATIC=/home/ortur/dsl
 
 //Value Computed by CMake
+compiler_BINARY_DIR:STATIC=/home/ortur/dsl/cmake-build-debug/build/compiler
+
+//Value Computed by CMake
+compiler_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+compiler_SOURCE_DIR:STATIC=/home/ortur/dsl/compiler
+
+//Value Computed by CMake
+compiler_tests_BINARY_DIR:STATIC=/home/ortur/dsl/cmake-build-debug/build/tests
+
+//Value Computed by CMake
+compiler_tests_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+compiler_tests_SOURCE_DIR:STATIC=/home/ortur/dsl/tests
+
+//Value Computed by CMake
 dsl_BINARY_DIR:STATIC=/home/ortur/dsl/cmake-build-debug/build/compiler
 
 //Value Computed by CMake
@@ -316,6 +340,9 @@ pupupu_SOURCE_DIR:STATIC=/home/ortur/dsl/compiler
 
 //Value Computed by CMake
 token_BINARY_DIR:STATIC=/home/ortur/dsl/cmake-build-debug/build/compiler/token
+
+//The directory containing a CMake configuration file for token.
+token_DIR:PATH=token_DIR-NOTFOUND
 
 //Value Computed by CMake
 token_IS_TOP_LEVEL:STATIC=OFF
@@ -424,7 +451,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=4
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=5
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
