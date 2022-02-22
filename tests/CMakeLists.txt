@@ -4,7 +4,8 @@ project(compiler_tests)
 set(CMAKE_CXX_STANDARD 20)
 
 include_directories(libs)
-include_directories()
+include_directories(../)
 
 
-add_executable(${PROJECT_NAME} main.cpp)
+add_subdirectory(test_lexer)
+add_subdirectory(test_token)

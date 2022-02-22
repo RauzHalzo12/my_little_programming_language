@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 20)
 
 set(
         SOURCES
-        test_lexer.cpp
+        #test_lexer.cpp
         lexer.cpp
         token_recognizer.cpp
 )

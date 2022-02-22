@@ -339,6 +339,24 @@ pupupu_IS_TOP_LEVEL:STATIC=OFF
 pupupu_SOURCE_DIR:STATIC=/home/ortur/dsl/compiler
 
 //Value Computed by CMake
+test_lexer_BINARY_DIR:STATIC=/home/ortur/dsl/cmake-build-debug/build/tests/test_lexer
+
+//Value Computed by CMake
+test_lexer_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+test_lexer_SOURCE_DIR:STATIC=/home/ortur/dsl/tests/test_lexer
+
+//Value Computed by CMake
+test_token_BINARY_DIR:STATIC=/home/ortur/dsl/cmake-build-debug/build/tests/test_token
+
+//Value Computed by CMake
+test_token_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+test_token_SOURCE_DIR:STATIC=/home/ortur/dsl/tests/test_token
+
+//Value Computed by CMake
 token_BINARY_DIR:STATIC=/home/ortur/dsl/cmake-build-debug/build/compiler/token
 
 //The directory containing a CMake configuration file for token.
@@ -451,7 +469,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=5
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=7
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
