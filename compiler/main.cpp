@@ -12,6 +12,11 @@
 using namespace std;
 
 int main() {
-
+    stringstream ss;
+    ss << "@size - = fi 1";
+    //auto result = SplitTextIntoTokens(ss, grammar::proto_rules);
+    for (auto& token : SplitTextIntoTokens(ss, grammar::proto_rules) ){
+        cout << token << endl;
+    }
     return 0;
 }

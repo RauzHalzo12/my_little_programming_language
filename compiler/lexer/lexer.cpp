@@ -10,6 +10,7 @@
 using namespace std;
 
 
+
 deque<TokenPtr> SplitLineIntoTokens(const string& line, const grammar::Rules& rules) {
     deque<TokenPtr> result;
 
@@ -19,15 +20,22 @@ deque<TokenPtr> SplitLineIntoTokens(const string& line, const grammar::Rules& ru
         size_t r = l+1;
         for (; r <= line.size(); r++) {
             auto subs = line.substr(l, r - l);
+
             auto state = recognizer.TryIdentify(subs);
 
             if (state == RecognitionResult::NONE) {
+
+
                 auto final_descision = recognizer.GetLastIdentified();
 
-                if (final_descision != TokenType::UNDEFINED && final_descision != TokenType::SEPARATOR) {
+                if (final_descision == TokenType::UNDEFINED) {
+                    throw runtime_error("invalid symbol was used!");
+                }
+
+                if (final_descision != TokenType::SEPARATOR) {
                     result.push_back(move(
                             MakeToken(final_descision,
-                                      move(string(line.begin()+l, line.begin() + r-1)))
+                                      move(line.substr(l, r - l - 1)))
                     ));
                 }
 
@@ -37,6 +45,8 @@ deque<TokenPtr> SplitLineIntoTokens(const string& line, const grammar::Rules& ru
                 break;
 
             } else {
+
+
 
                 if (r == line.size()) {
                     auto final_descision = recognizer.GetCurrentMatch();

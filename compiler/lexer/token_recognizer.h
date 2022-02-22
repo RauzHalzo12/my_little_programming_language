@@ -26,6 +26,7 @@ public:
     TokenType MakeFinalDesision(bool is_end_of_line) const;
 
     void Reset();
+
 private:
 
     const grammar::Rules& rules_;
