@@ -15,6 +15,7 @@
      SEPARATOR,
      OPERATOR,
      LITERAL,
+     //QUOTE,
      UNDEFINED
  };
 

@@ -5,9 +5,12 @@
 #include "compiler/lexer/lexer.h"
 #include "compiler/lexer/rules.h"
 
+#include <fstream>
+
+
 using namespace std;
 
-void TestEmpty() {
+void TestEmptyLine() {
     {
         string empty = "";
 
@@ -34,9 +37,22 @@ void TestEmpty() {
 
 }
 
+void TestStream() {
+    ifstream input_file("example1.txt");
+    if (!input_file.is_open()) {
+        cerr << "FILE NOT FOUND!" << endl;
+    }
+    for (auto& token : SplitTextIntoTokens(input_file, grammar::proto_rules)) {
+        cout << token << endl;
+    }
+    input_file.close();
+
+}
+
 
 int main() {
     TestRunner tr;
-    RUN_TEST(tr, TestEmpty);
+    RUN_TEST(tr, TestEmptyLine);
+    RUN_TEST(tr, TestStream);
     return 0;
 }

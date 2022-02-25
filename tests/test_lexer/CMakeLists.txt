@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.21)
 
 project(test_lexer)
 
-
+#add_subdirectory(../../examples/example1.txt)
 
 set(
         SOURCES

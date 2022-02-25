@@ -5,11 +5,7 @@
 #include "rules.h"
 #include "token_recognizer.h"
 
-#include <string_view>
-
 using namespace std;
-
-
 
 deque<TokenPtr> SplitLineIntoTokens(const string& line, const grammar::Rules& rules) {
     deque<TokenPtr> result;
@@ -45,8 +41,6 @@ deque<TokenPtr> SplitLineIntoTokens(const string& line, const grammar::Rules& ru
                 break;
 
             } else {
-
-
 
                 if (r == line.size()) {
                     auto final_descision = recognizer.GetCurrentMatch();

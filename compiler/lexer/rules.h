@@ -29,9 +29,10 @@ namespace grammar {
     const Rules proto_rules = {
             {TokenType::IDENTIFIER, std::regex(R"([A-Za-z]{1,})")},
             {TokenType::OPERATOR, std::regex(R"([+\-*/=]{1})")},
-            {TokenType::KEYWORD, std::regex(R"((\bfor\b)|(\bif\b)|(\belse\b))")},
+            {TokenType::KEYWORD, std::regex(R"((\bfor\b)|(\bif\b)|(\belse\b)|(\b:\b))")},
             {TokenType::LITERAL, std::regex(R"([0-9]{1,})")},
-            {TokenType::SEPARATOR, std::regex(R"([\s]{1,})")},
+            {TokenType::SEPARATOR, std::regex(R"([\s\t]{1,})")},
+            //{TokenType::QUOTE, std::regex(R"(["]{1})")},
     };
 }
 
