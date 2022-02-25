@@ -5,7 +5,11 @@
 #ifndef MY_LITTLE_PROGRAMMING_LANGUAGE_RULES_H
 #define MY_LITTLE_PROGRAMMING_LANGUAGE_RULES_H
 
+#ifndef TESTING_MODE
 #include "token.h"
+#else
+#include "../token/token.h"
+#endif
 
 #include <iostream>
 #include <regex>

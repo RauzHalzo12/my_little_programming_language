@@ -73,6 +73,20 @@ public:
     }
 };
 
+
+class UndefToken : public IToken {
+public:
+    explicit UndefToken(const string& value)
+            : IToken(TokenType::UNDEFINED, value){}
+
+    explicit UndefToken(string&& value)
+            : IToken(TokenType::UNDEFINED, move(value)){}
+
+    [[nodiscard]] string GetTypeAsString() const override {
+        return "undefined";
+    }
+};
+
 TokenPtr MakeToken(TokenType type, const std::string& value) {
     if (type == TokenType::IDENTIFIER) {
         return make_unique<IdToken>(value);
@@ -84,6 +98,8 @@ TokenPtr MakeToken(TokenType type, const std::string& value) {
         return make_unique<OpToken>(value);
     } else if (type == TokenType::LITERAL) {
         return make_unique<LitToken>(value);
+    } else if (type == TokenType::UNDEFINED) {
+        return make_unique<UndefToken>(value);
     }
     return nullptr;
 }
@@ -99,11 +115,13 @@ TokenPtr MakeToken(TokenType type, std::string&& value) {
         return make_unique<OpToken>(move(value));
     } else if (type == TokenType::LITERAL) {
         return make_unique<LitToken>(move(value));
+    } else if (type == TokenType::UNDEFINED) {
+        return make_unique<UndefToken>(move(value));
     }
     return nullptr;
 }
 
 ostream& operator<<(ostream& out, const TokenPtr& token) {
-    out << "[" << token->GetTypeAsString() << ", " << token->GetValue() << "]";
+    out << "[" << token->GetTypeAsString() << ", " << token->GetValueView() << "]";
     return out;
 }

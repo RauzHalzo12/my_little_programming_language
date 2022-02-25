@@ -313,7 +313,7 @@ build build/tests/test_lexer/edit_cache: phony build/tests/test_lexer/CMakeFiles
 #############################################
 # Order-only phony target for test_lexer
 
-build cmake_object_order_depends_target_test_lexer: phony || build/tests/test_lexer/CMakeFiles/test_lexer.dir
+build cmake_object_order_depends_target_test_lexer: phony || cmake_object_order_depends_target_lexer cmake_object_order_depends_target_token
 
 build build/tests/test_lexer/CMakeFiles/test_lexer.dir/test_lexer.cpp.o: CXX_COMPILER__test_lexer_Debug /home/ortur/dsl/tests/test_lexer/test_lexer.cpp || cmake_object_order_depends_target_test_lexer
   DEP_FILE = build/tests/test_lexer/CMakeFiles/test_lexer.dir/test_lexer.cpp.o.d
@@ -330,8 +330,9 @@ build build/tests/test_lexer/CMakeFiles/test_lexer.dir/test_lexer.cpp.o: CXX_COM
 #############################################
 # Link the executable build/tests/test_lexer/test_lexer
 
-build build/tests/test_lexer/test_lexer: CXX_EXECUTABLE_LINKER__test_lexer_Debug build/tests/test_lexer/CMakeFiles/test_lexer.dir/test_lexer.cpp.o
+build build/tests/test_lexer/test_lexer: CXX_EXECUTABLE_LINKER__test_lexer_Debug build/tests/test_lexer/CMakeFiles/test_lexer.dir/test_lexer.cpp.o | build/compiler/token/libtoken.a build/compiler/lexer/liblexer.a build/compiler/token/libtoken.a || build/compiler/lexer/liblexer.a build/compiler/token/libtoken.a
   FLAGS = -g
+  LINK_LIBRARIES = build/compiler/token/libtoken.a  build/compiler/lexer/liblexer.a  build/compiler/token/libtoken.a
   OBJECT_DIR = build/tests/test_lexer/CMakeFiles/test_lexer.dir
   POST_BUILD = :
   PRE_LINK = :
@@ -373,7 +374,7 @@ build build/tests/test_token/edit_cache: phony build/tests/test_token/CMakeFiles
 #############################################
 # Order-only phony target for test_token
 
-build cmake_object_order_depends_target_test_token: phony || build/tests/test_token/CMakeFiles/test_token.dir
+build cmake_object_order_depends_target_test_token: phony || cmake_object_order_depends_target_token
 
 build build/tests/test_token/CMakeFiles/test_token.dir/test_token.cpp.o: CXX_COMPILER__test_token_Debug /home/ortur/dsl/tests/test_token/test_token.cpp || cmake_object_order_depends_target_test_token
   DEP_FILE = build/tests/test_token/CMakeFiles/test_token.dir/test_token.cpp.o.d
@@ -390,8 +391,9 @@ build build/tests/test_token/CMakeFiles/test_token.dir/test_token.cpp.o: CXX_COM
 #############################################
 # Link the executable build/tests/test_token/test_token
 
-build build/tests/test_token/test_token: CXX_EXECUTABLE_LINKER__test_token_Debug build/tests/test_token/CMakeFiles/test_token.dir/test_token.cpp.o
+build build/tests/test_token/test_token: CXX_EXECUTABLE_LINKER__test_token_Debug build/tests/test_token/CMakeFiles/test_token.dir/test_token.cpp.o | build/compiler/token/libtoken.a || build/compiler/token/libtoken.a
   FLAGS = -g
+  LINK_LIBRARIES = build/compiler/token/libtoken.a
   OBJECT_DIR = build/tests/test_token/CMakeFiles/test_token.dir
   POST_BUILD = :
   PRE_LINK = :

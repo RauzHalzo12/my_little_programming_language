@@ -17,5 +17,6 @@ int main() {
     for (auto& token : SplitTextIntoTokens(ss, grammar::proto_rules) ){
         cout << token << endl;
     }
+
     return 0;
 }

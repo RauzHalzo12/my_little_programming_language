@@ -28,7 +28,7 @@
 
 
      [[nodiscard]] virtual std::string GetTypeAsString() const = 0;
-     [[nodiscard]] std::string_view GetValue() const { return value_; };
+     [[nodiscard]] std::string_view GetValueView() const { return value_; };
      [[nodiscard]] TokenType GetType() const {return type_;}
 
      virtual ~IToken() = default;
