@@ -45,6 +45,10 @@ deque<TokenPtr> SplitLineIntoTokens(const string& line, const grammar::Rules& ru
                 if (r == line.size()) {
                     auto final_descision = recognizer.GetCurrentMatch();
 
+                    if (final_descision == TokenType::UNFINISHED_STRING_LITERAL) {
+                        throw runtime_error("has unfinished string literal!");
+                    }
+
                     if (final_descision != TokenType::UNDEFINED && final_descision != TokenType::SEPARATOR) {
                         result.push_back(move(MakeToken(final_descision, subs)));
                     }

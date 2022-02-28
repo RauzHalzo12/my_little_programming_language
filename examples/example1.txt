@@ -1,9 +1,35 @@
 load "module_name"
 load "another_module"
 
+''' Документация '''
 
-void Main():
+// Комментарий
+
+/*
+    Очень
+    Длинный
+    Комментарий
+*/
+
+
+// Не имеет методов
+struct Structure {
+
+}
+
+class ClassName {
+
+}
+
+void Main() :
 	Print("Hello, world!")
 	int a = 4
-	double b = -5.123221321
-	String str = "aoaoaoaoaoaoaoaooaoao"	 
+	float b = -5.123221321
+	String str = "aoaoaoaoaoaoaoaooaoao"
+
+    for (int i = 0; i < 100; i++) :
+        Print(i + "\n")
+
+
+
+

@@ -73,6 +73,18 @@ public:
     }
 };
 
+class StringLiteralToken : public IToken {
+public:
+    explicit StringLiteralToken(const string& value)
+            : IToken(TokenType::STRING_LITERAL, value){}
+
+    explicit StringLiteralToken(string&& value)
+    : IToken(TokenType::STRING_LITERAL, move(value)){}
+
+    [[nodiscard]] string GetTypeAsString() const override {
+        return "string-literal";
+    }
+};
 
 class UndefToken : public IToken {
 public:
@@ -100,6 +112,8 @@ TokenPtr MakeToken(TokenType type, const std::string& value) {
         return make_unique<OpToken>(value);
     } else if (type == TokenType::LITERAL) {
         return make_unique<LitToken>(value);
+    } else if (type == TokenType::STRING_LITERAL) {
+        return make_unique<StringLiteralToken>(value);
     } else if (type == TokenType::UNDEFINED) {
         return make_unique<UndefToken>(value);
     }
@@ -117,6 +131,8 @@ TokenPtr MakeToken(TokenType type, std::string&& value) {
         return make_unique<OpToken>(move(value));
     } else if (type == TokenType::LITERAL) {
         return make_unique<LitToken>(move(value));
+    } else if (type == TokenType::STRING_LITERAL) {
+        return make_unique<StringLiteralToken>(move(value));
     } else if (type == TokenType::UNDEFINED) {
         return make_unique<UndefToken>(move(value));
     }
