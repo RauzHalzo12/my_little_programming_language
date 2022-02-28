@@ -60,16 +60,16 @@ public:
     }
 };
 
-class LitToken : public IToken {
+class NumToken : public IToken {
 public:
-    explicit LitToken(const string& value)
-            : IToken(TokenType::LITERAL, value){}
+    explicit NumToken(const string& value)
+            : IToken(TokenType::NUMBER_LITERAL, value){}
 
-    explicit LitToken(string&& value)
-    : IToken(TokenType::LITERAL, move(value)){}
+    explicit NumToken(string&& value)
+    : IToken(TokenType::NUMBER_LITERAL, move(value)){}
 
     [[nodiscard]] string GetTypeAsString() const override {
-        return "literal";
+        return "number-literal";
     }
 };
 
@@ -110,8 +110,8 @@ TokenPtr MakeToken(TokenType type, const std::string& value) {
         return make_unique<SepToken>(value);
     } else if (type == TokenType::OPERATOR) {
         return make_unique<OpToken>(value);
-    } else if (type == TokenType::LITERAL) {
-        return make_unique<LitToken>(value);
+    } else if (type == TokenType::NUMBER_LITERAL) {
+        return make_unique<NumToken>(value);
     } else if (type == TokenType::STRING_LITERAL) {
         return make_unique<StringLiteralToken>(value);
     } else if (type == TokenType::UNDEFINED) {
@@ -129,8 +129,8 @@ TokenPtr MakeToken(TokenType type, std::string&& value) {
         return make_unique<SepToken>(move(value));
     } else if (type == TokenType::OPERATOR) {
         return make_unique<OpToken>(move(value));
-    } else if (type == TokenType::LITERAL) {
-        return make_unique<LitToken>(move(value));
+    } else if (type == TokenType::NUMBER_LITERAL) {
+        return make_unique<NumToken>(move(value));
     } else if (type == TokenType::STRING_LITERAL) {
         return make_unique<StringLiteralToken>(move(value));
     } else if (type == TokenType::UNDEFINED) {
