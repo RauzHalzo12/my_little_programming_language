@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "build/compiler/compiler"
+			"path" : "build/tests/test_lexer/test_lexer"
 		}
 	],
 	"backtrace" : 1,
@@ -16,7 +16,8 @@
 		],
 		"files" : 
 		[
-			"compiler/CMakeLists.txt"
+			"tests/test_lexer/CMakeLists.txt",
+			"tests/CMakeLists.txt"
 		],
 		"nodes" : 
 		[
@@ -26,38 +27,35 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 24,
+				"line" : 16,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 26,
+				"line" : 17,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 27,
+				"line" : 18,
 				"parent" : 0
+			},
+			{
+				"file" : 1
 			},
 			{
 				"command" : 2,
-				"file" : 0,
+				"file" : 1,
+				"line" : 6,
+				"parent" : 4
+			},
+			{
+				"command" : 2,
+				"file" : 1,
 				"line" : 7,
-				"parent" : 0
-			},
-			{
-				"command" : 2,
-				"file" : 0,
-				"line" : 10,
-				"parent" : 0
-			},
-			{
-				"command" : 2,
-				"file" : 0,
-				"line" : 13,
-				"parent" : 0
+				"parent" : 4
 			}
 		]
 	},
@@ -73,19 +71,26 @@
 					"fragment" : "-std=gnu++2a"
 				}
 			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_ALL_NO_LIB"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_REGEX_DYN_LINK"
+				}
+			],
 			"includes" : 
 			[
 				{
-					"backtrace" : 4,
-					"path" : "/home/ortur/CLionProjects/my_little_programming_language/compiler/benchmark_libs"
-				},
-				{
 					"backtrace" : 5,
-					"path" : "/home/ortur/CLionProjects/my_little_programming_language/compiler/token"
+					"path" : "/home/ortur/CLionProjects/my_little_programming_language/tests/libs"
 				},
 				{
 					"backtrace" : 6,
-					"path" : "/home/ortur/CLionProjects/my_little_programming_language/compiler/lexer"
+					"path" : "/home/ortur/CLionProjects/my_little_programming_language/tests/.."
 				}
 			],
 			"language" : "CXX",
@@ -114,7 +119,7 @@
 			"id" : "lexer::@b31f9cc066dc5d55fee7"
 		}
 	],
-	"id" : "compiler::@c30e0ab8ca2a9fc4a67b",
+	"id" : "test_lexer::@f93a2582f68776b03a6a",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -141,16 +146,20 @@
 				"backtrace" : 2,
 				"fragment" : "build/compiler/token/libtoken.a",
 				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0",
+				"role" : "libraries"
 			}
 		],
 		"language" : "CXX"
 	},
-	"name" : "compiler",
-	"nameOnDisk" : "compiler",
+	"name" : "test_lexer",
+	"nameOnDisk" : "test_lexer",
 	"paths" : 
 	{
-		"build" : "build/compiler",
-		"source" : "compiler"
+		"build" : "build/tests/test_lexer",
+		"source" : "tests/test_lexer"
 	},
 	"sourceGroups" : 
 	[
@@ -167,7 +176,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "compiler/main.cpp",
+			"path" : "tests/test_lexer/test_lexer.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],

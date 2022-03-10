@@ -4,6 +4,7 @@ project(compiler)
 
 set(CMAKE_CXX_STANDARD 20)
 
+
 include_directories(benchmark_libs)
 
 add_subdirectory(token)

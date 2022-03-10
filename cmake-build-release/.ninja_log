@@ -1,8 +1,15 @@
 # ninja log v5
-6499	6626	1646952861778167715	build/compiler/compiler	6dfc905f15a2bea9
-1269	1278	1646952399357298648	build/compiler/token/libtoken.a	fab41acc9fa25d82
-2	6007	1646952861162205132	build/compiler/CMakeFiles/compiler.dir/main.cpp.o	c5d43cbdb36f6130
-2	6482	1646952861634176462	build/compiler/lexer/CMakeFiles/lexer.dir/token_recognizer.cpp.o	73eeee9f4a79ee3b
-6482	6499	1646952861654175247	build/compiler/lexer/liblexer.a	ecd0c765fee4de62
-2	5745	1646952860898221178	build/compiler/lexer/CMakeFiles/lexer.dir/lexer.cpp.o	19626dc9e97a43d4
-2	1269	1646952399349299745	build/compiler/token/CMakeFiles/token.dir/token.cpp.o	68af6b86c6d56d83
+6950	7073	1646953000250652971	build/compiler/compiler	ff735f2e372df0bf
+1359	1367	1646952994542930360	build/compiler/token/libtoken.a	fab41acc9fa25d82
+2	6018	1646952999194704095	build/compiler/CMakeFiles/compiler.dir/main.cpp.o	f13873ed19ea00a5
+4	6930	1646953000106659933	build/compiler/lexer/CMakeFiles/lexer.dir/token_recognizer.cpp.o	4596cfa9d551de87
+6930	6950	1646953000126658966	build/compiler/lexer/liblexer.a	ecd0c765fee4de62
+3	5959	1646952999134707001	build/compiler/lexer/CMakeFiles/lexer.dir/lexer.cpp.o	cebe51c91f0028e0
+2	1359	1646952994534930750	build/compiler/token/CMakeFiles/token.dir/token.cpp.o	bbb8b6e8d9dc5d1
+3	1178	1646953173927299651	build/compiler/token/CMakeFiles/token.dir/token.cpp.o	68af6b86c6d56d83
+1178	1187	1646953173939299207	build/compiler/token/libtoken.a	fab41acc9fa25d82
+3	2325	1646953175075257272	build/compiler/lexer/CMakeFiles/lexer.dir/lexer.cpp.o	af63754aca756ba1
+2	2403	1646953175151254471	build/compiler/CMakeFiles/compiler.dir/main.cpp.o	ccc20bf262cf4c04
+3	4234	1646953176983186999	build/compiler/lexer/CMakeFiles/lexer.dir/token_recognizer.cpp.o	c7040ea397e3c93c
+4234	4246	1646953176999186410	build/compiler/lexer/liblexer.a	ecd0c765fee4de62
+4246	4390	1646953177139181265	build/compiler/compiler	9ec6ef39311a788c

@@ -26,13 +26,7 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 24,
-				"parent" : 0
-			},
-			{
-				"command" : 1,
-				"file" : 0,
-				"line" : 26,
+				"line" : 25,
 				"parent" : 0
 			},
 			{
@@ -42,21 +36,27 @@
 				"parent" : 0
 			},
 			{
-				"command" : 2,
+				"command" : 1,
 				"file" : 0,
-				"line" : 7,
+				"line" : 28,
 				"parent" : 0
 			},
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 10,
+				"line" : 8,
 				"parent" : 0
 			},
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 13,
+				"line" : 11,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 14,
 				"parent" : 0
 			}
 		]
@@ -67,10 +67,21 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g"
+					"fragment" : "-O3 -DNDEBUG"
 				},
 				{
 					"fragment" : "-std=gnu++2a"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_ALL_NO_LIB"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_REGEX_DYN_LINK"
 				}
 			],
 			"includes" : 
@@ -120,7 +131,7 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "-g",
+				"fragment" : "-O3 -DNDEBUG",
 				"role" : "flags"
 			},
 			{
@@ -140,6 +151,10 @@
 			{
 				"backtrace" : 2,
 				"fragment" : "build/compiler/token/libtoken.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0",
 				"role" : "libraries"
 			}
 		],

@@ -12,7 +12,7 @@
 #endif
 
 #include <iostream>
-#include <regex>
+#include <boost/regex.hpp>
 
 
 
@@ -20,7 +20,7 @@ namespace grammar {
 
     struct Rule {
         TokenType type_;
-        std::regex pattern_;
+        boost::regex pattern_;
     };
 
     using Rules = std::vector<Rule>;
@@ -28,13 +28,13 @@ namespace grammar {
     //регулярки для дробления
     const Rules rulesV3 = {
 
-            {TokenType::OPERATOR,       std::regex(R"([+\-*/=%&!]{1}|(==){1}|(\*\*){1}|(\-\-){1}|(\+\+){1})")},
-            {TokenType::IDENTIFIER,     std::regex(R"([A-Za-z_]{1,})")},
-            {TokenType::KEYWORD,        std::regex(R"((\bfor\b)|(\bif\b)|(\belse\b)|(\b:\b)|(\bload\b))")},
-            {TokenType::NUMBER,         std::regex(R"(([\-]{0,1}([0]{0,})([0-9]*)))")},
-            {TokenType::BRACKET,        std::regex(R"([\[\](){}<>]{1})")},
-            {TokenType::SEPARATOR,      std::regex(R"([\t\s;,]{1,})")},
-            {TokenType::STRING_LITERAL, std::regex(R"("(\\.|[^\\"])*")")},
+            {TokenType::OPERATOR,       boost::regex(R"([+\-*/=%&!]{1}|(==){1}|(\*\*){1}|(\-\-){1}|(\+\+){1})")},
+            {TokenType::IDENTIFIER,     boost::regex(R"([A-Za-z_]{1,})")},
+            {TokenType::KEYWORD,        boost::regex(R"((\bfor\b)|(\bif\b)|(\belse\b)|(\b:\b)|(\bload\b))")},
+            {TokenType::NUMBER,         boost::regex(R"(([\-]{0,1}([0]{0,})([0-9]*)))")},
+            {TokenType::BRACKET,        boost::regex(R"([\[\](){}<>]{1})")},
+            {TokenType::SEPARATOR,      boost::regex(R"([\t\s;,]{1,})")},
+            {TokenType::STRING_LITERAL, boost::regex(R"("(\\.|[^\\"])*")")},
 
     };
 }

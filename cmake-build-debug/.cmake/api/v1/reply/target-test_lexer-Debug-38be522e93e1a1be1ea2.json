@@ -71,6 +71,17 @@
 					"fragment" : "-std=gnu++2a"
 				}
 			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_ALL_NO_LIB"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_REGEX_DYN_LINK"
+				}
+			],
 			"includes" : 
 			[
 				{
@@ -134,6 +145,10 @@
 			{
 				"backtrace" : 2,
 				"fragment" : "build/compiler/token/libtoken.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0",
 				"role" : "libraries"
 			}
 		],

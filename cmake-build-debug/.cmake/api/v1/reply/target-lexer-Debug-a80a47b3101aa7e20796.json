@@ -38,19 +38,25 @@
 				"parent" : 0
 			},
 			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
 				"file" : 1
 			},
 			{
 				"command" : 2,
 				"file" : 1,
-				"line" : 7,
-				"parent" : 3
+				"line" : 8,
+				"parent" : 4
 			},
 			{
 				"command" : 2,
 				"file" : 1,
-				"line" : 10,
-				"parent" : 3
+				"line" : 11,
+				"parent" : 4
 			}
 		]
 	},
@@ -66,14 +72,25 @@
 					"fragment" : "-std=gnu++2a"
 				}
 			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_ALL_NO_LIB"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "BOOST_REGEX_DYN_LINK"
+				}
+			],
 			"includes" : 
 			[
 				{
-					"backtrace" : 4,
+					"backtrace" : 5,
 					"path" : "/home/ortur/CLionProjects/my_little_programming_language/compiler/benchmark_libs"
 				},
 				{
-					"backtrace" : 5,
+					"backtrace" : 6,
 					"path" : "/home/ortur/CLionProjects/my_little_programming_language/compiler/token"
 				}
 			],

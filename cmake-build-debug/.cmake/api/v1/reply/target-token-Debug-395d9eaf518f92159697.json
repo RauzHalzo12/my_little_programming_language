@@ -36,7 +36,7 @@
 			{
 				"command" : 1,
 				"file" : 1,
-				"line" : 7,
+				"line" : 8,
 				"parent" : 2
 			}
 		]
@@ -47,7 +47,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-O3 -DNDEBUG"
+					"fragment" : "-g"
 				},
 				{
 					"fragment" : "-std=gnu++17"

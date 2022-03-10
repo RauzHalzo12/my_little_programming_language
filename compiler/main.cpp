@@ -17,7 +17,7 @@ using namespace std;
 
 
 int main() {
-    LOG_DURATION("My pp is bigger")
+    LOG_DURATION("TOTAL:")
    for (int i = 0; i < 50; i++) {
         ifstream source_file("src.pup");
         if (!source_file.is_open()) {
