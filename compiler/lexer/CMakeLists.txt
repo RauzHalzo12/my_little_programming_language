@@ -5,6 +5,7 @@ project(lexer)
 set(CMAKE_CXX_STANDARD 20)
 
 
+
 set(
         SOURCES
         #test_lexer.cpp
@@ -20,3 +21,4 @@ set(
 
 add_library(${PROJECT_NAME} ${HEADERS} ${SOURCES})
 target_link_libraries(${PROJECT_NAME} token)
+

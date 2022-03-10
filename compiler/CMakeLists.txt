@@ -4,6 +4,7 @@ project(compiler)
 
 set(CMAKE_CXX_STANDARD 20)
 
+include_directories(benchmark_libs)
 
 add_subdirectory(token)
 include_directories(token)
@@ -21,5 +22,6 @@ set(
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+
 target_link_libraries(${PROJECT_NAME} token)
 target_link_libraries(${PROJECT_NAME} lexer)

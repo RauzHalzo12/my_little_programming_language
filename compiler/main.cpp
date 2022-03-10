@@ -3,19 +3,29 @@
 //
 
 #include <iostream>
+#include <vector>
+#include <sstream>
+#include <fstream>
 
 #include "token.h"
+
 #include "lexer.h"
 #include "rules.h"
-
+#include "benchmark_libs/profile.h"
 
 using namespace std;
 
+
 int main() {
-    stringstream ss;
-    ss << "for int i = 0 i ++ 6889889879789789789789789789789897909889897897897897897897898978998";
-    for (auto& token : SplitTextIntoTokens(ss, grammar::proto_rules) ){
-        cout << token << endl;
+    LOG_DURATION("My pp is bigger")
+   for (int i = 0; i < 50; i++) {
+        ifstream source_file("src.pup");
+        if (!source_file.is_open()) {
+            cerr << "No file!";
+        }
+        SplitTextIntoTokens(source_file);
+
+        source_file.close();
     }
 
     return 0;

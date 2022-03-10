@@ -26,15 +26,16 @@ namespace grammar {
     using Rules = std::vector<Rule>;
 
     //регулярки для дробления
-    const Rules proto_rules = {
-            {TokenType::IDENTIFIER,                std::regex(R"([A-Za-z]{1,})")},
-            {TokenType::OPERATOR,                  std::regex(R"([+\-*/=]{1})")},
-            {TokenType::KEYWORD,                   std::regex(R"((\bfor\b)|(\bif\b)|(\belse\b)|(\b:\b)|(\bload\b))")},
-            {TokenType::NUMBER_LITERAL,            std::regex(R"(([\-]{0,1}([0]{0,})([0-9]*)))")},
-            {TokenType::SEPARATOR,                 std::regex(R"([\s\t]{1,})")},
-            {TokenType::UNFINISHED_STRING_LITERAL, std::regex(R"(\"(\\.|[^\\"])*)")},
-            {TokenType::STRING_LITERAL,            std::regex(R"(\"(\\.|[^\\"])*\")")}, // ?
-            //{TokenType::QUOTE, std::regex(R"(["]{1})")},
+    const Rules rulesV3 = {
+
+            {TokenType::OPERATOR,       std::regex(R"([+\-*/=%&!]{1}|(==){1}|(\*\*){1}|(\-\-){1}|(\+\+){1})")},
+            {TokenType::IDENTIFIER,     std::regex(R"([A-Za-z_]{1,})")},
+            {TokenType::KEYWORD,        std::regex(R"((\bfor\b)|(\bif\b)|(\belse\b)|(\b:\b)|(\bload\b))")},
+            {TokenType::NUMBER,         std::regex(R"(([\-]{0,1}([0]{0,})([0-9]*)))")},
+            {TokenType::BRACKET,        std::regex(R"([\[\](){}<>]{1})")},
+            {TokenType::SEPARATOR,      std::regex(R"([\t\s;,]{1,})")},
+            {TokenType::STRING_LITERAL, std::regex(R"("(\\.|[^\\"])*")")},
+
     };
 }
 

@@ -63,10 +63,10 @@ public:
 class NumToken : public IToken {
 public:
     explicit NumToken(const string& value)
-            : IToken(TokenType::NUMBER_LITERAL, value){}
+            : IToken(TokenType::NUMBER, value){}
 
     explicit NumToken(string&& value)
-    : IToken(TokenType::NUMBER_LITERAL, move(value)){}
+    : IToken(TokenType::NUMBER, move(value)){}
 
     [[nodiscard]] string GetTypeAsString() const override {
         return "number-literal";
@@ -99,6 +99,18 @@ public:
     }
 };
 
+class BracketToken : public IToken {
+public:
+    explicit BracketToken(const string& value)
+            : IToken(TokenType::BRACKET, value){}
+
+    explicit BracketToken(string&& value)
+            : IToken(TokenType::BRACKET, move(value)){}
+
+    [[nodiscard]] string GetTypeAsString() const override {
+        return "bracket";
+    }
+};
 
 
 TokenPtr MakeToken(TokenType type, const std::string& value) {
@@ -110,10 +122,12 @@ TokenPtr MakeToken(TokenType type, const std::string& value) {
         return make_unique<SepToken>(value);
     } else if (type == TokenType::OPERATOR) {
         return make_unique<OpToken>(value);
-    } else if (type == TokenType::NUMBER_LITERAL) {
+    } else if (type == TokenType::NUMBER) {
         return make_unique<NumToken>(value);
     } else if (type == TokenType::STRING_LITERAL) {
         return make_unique<StringLiteralToken>(value);
+    } else if (type == TokenType::BRACKET) {
+        return make_unique<BracketToken>(value);
     } else if (type == TokenType::UNDEFINED) {
         return make_unique<UndefToken>(value);
     }
@@ -129,10 +143,12 @@ TokenPtr MakeToken(TokenType type, std::string&& value) {
         return make_unique<SepToken>(move(value));
     } else if (type == TokenType::OPERATOR) {
         return make_unique<OpToken>(move(value));
-    } else if (type == TokenType::NUMBER_LITERAL) {
+    } else if (type == TokenType::NUMBER) {
         return make_unique<NumToken>(move(value));
     } else if (type == TokenType::STRING_LITERAL) {
         return make_unique<StringLiteralToken>(move(value));
+    } else if (type == TokenType::BRACKET) {
+        return make_unique<BracketToken>(move(value));
     } else if (type == TokenType::UNDEFINED) {
         return make_unique<UndefToken>(move(value));
     }

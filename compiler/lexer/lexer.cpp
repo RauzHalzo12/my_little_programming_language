@@ -7,73 +7,111 @@
 
 using namespace std;
 
-deque<TokenPtr> SplitLineIntoTokens(const string& line, const grammar::Rules& rules) {
-    deque<TokenPtr> result;
+class Buffer {
+public:
+    Buffer(const Buffer &) = delete;
 
-    TokenRecognizer recognizer(rules);
+    const Buffer &operator=(const Buffer &) = delete;
 
-    for (size_t l = 0; l < line.size();) {
-        size_t r = l+1;
-        for (; r <= line.size(); r++) {
-            auto subs = line.substr(l, r - l);
+    Buffer(size_t capacity) : capacity_(capacity), data_(new char[capacity]) {}
 
-            auto state = recognizer.TryIdentify(subs);
+    Buffer &operator<<(char symbol) {
+        if (size_ + 1 <= capacity_) {
+            data_[size_++] = symbol;
+        }
+        return *this;
+    }
 
-            if (state == RecognitionResult::NONE) {
+    string GetPrefix(size_t prefix_size) const {
+        return string(data_, prefix_size);
+    }
+
+    string ToString() const {
+        return string(data_, size_);
+    }
+
+    size_t GetSize() const {
+        return size_;
+    }
+
+    bool Empty() const {
+        return size_ == 0;
+    }
+
+    void Clear() {
+        size_ = 0;
+    }
+
+    ~Buffer() {
+        if (data_)
+            delete[] data_;
+    }
+
+private:
+    const size_t capacity_;
+    size_t size_ = 0;
+    char *data_;
+};
 
 
-                auto final_descision = recognizer.GetLastIdentified();
 
-                if (final_descision == TokenType::UNDEFINED) {
-                    throw runtime_error("invalid symbol was used!");
-                }
+vector<TokenPtr> SplitTextIntoTokens(istream& in, const grammar::Rules &rules) {
+    vector<TokenPtr> result;
 
-                if (final_descision != TokenType::SEPARATOR) {
-                    result.push_back(move(
-                            MakeToken(final_descision,
-                                      move(line.substr(l, r - l - 1)))
+    enum class RecognitionState {
+        WAITING_FOR_SUCCESS,
+        WAITING_FOR_UNSUCCESS,
+    };
+
+    RecognitionState current_state = RecognitionState::WAITING_FOR_SUCCESS;
+    Buffer symbols(256);
+    char curr;
+    TokenRecognizer tr(rules);
+
+    while (in >> std::noskipws >> curr) {
+        symbols << curr;
+
+        auto descision = tr.TryIdentify(std::move(symbols.ToString()));
+
+        if (descision == RecognitionResult::HAS_MATCHES) {
+            if (current_state == RecognitionState::WAITING_FOR_SUCCESS) {
+                current_state = RecognitionState::WAITING_FOR_UNSUCCESS;
+            }
+        } else {
+
+            if (current_state == RecognitionState::WAITING_FOR_UNSUCCESS) {
+
+                if (tr.GetLastIdentified() != TokenType::SEPARATOR) {
+                    result.push_back(std::move(
+                            MakeToken(
+                                    tr.GetLastIdentified(),
+                                    std::move(symbols.GetPrefix(symbols.GetSize() - 1))
+                            )
                     ));
                 }
 
-                l = r - 1;
 
-                recognizer.Reset();
-                break;
+                current_state = RecognitionState::WAITING_FOR_SUCCESS;
 
-            } else {
+                symbols.Clear();
+                symbols << curr;
 
-                if (r == line.size()) {
-                    auto final_descision = recognizer.GetCurrentMatch();
 
-                    if (final_descision == TokenType::UNFINISHED_STRING_LITERAL) {
-                        throw runtime_error("has unfinished string literal!");
-                    }
-
-                    if (final_descision != TokenType::UNDEFINED && final_descision != TokenType::SEPARATOR) {
-                        result.push_back(move(MakeToken(final_descision, subs)));
-                    }
-
-                    l = r;
-                    break;
+                if (tr.TryIdentify(symbols.ToString()) == RecognitionResult::HAS_MATCHES) {
+                    current_state = RecognitionState::WAITING_FOR_UNSUCCESS;
                 }
-
-                continue;
             }
-
         }
+
     }
 
-    return result;
-}
 
-
-deque<TokenPtr> SplitTextIntoTokens(istream& in, const grammar::Rules& rules) {
-    deque<TokenPtr> result;
-
-    for (string line; getline(in, line);) {
-        for (auto& token : SplitLineIntoTokens(line, rules)) {
-            result.push_back(move(token));
-        }
+    if (!symbols.Empty()) {
+        result.push_back(std::move(
+                MakeToken(
+                        tr.GetCurrentMatch(),
+                        std::move(symbols.ToString())
+                )));
     }
 
     return result;
