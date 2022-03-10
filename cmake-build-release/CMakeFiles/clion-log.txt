@@ -1,0 +1,5 @@
+/snap/clion/180/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_MAKE_PROGRAM=/snap/clion/180/bin/ninja/linux/ninja -G Ninja /home/ortur/CLionProjects/my_little_programming_language
+-- Could NOT find Boost: Found unsuitable version "1.71.0", but required is at least "1.77" (found /usr/include, found components: regex)
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/ortur/CLionProjects/my_little_programming_language/cmake-build-release

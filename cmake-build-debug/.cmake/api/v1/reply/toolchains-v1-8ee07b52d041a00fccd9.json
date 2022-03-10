@@ -5,13 +5,13 @@
 		{
 			"compiler" : 
 			{
-				"id" : "GNU",
+				"id" : "Clang",
 				"implicit" : 
 				{
 					"includeDirectories" : 
 					[
-						"/usr/lib/gcc/x86_64-linux-gnu/9/include",
 						"/usr/local/include",
+						"/usr/lib/llvm-10/lib/clang/10.0.0/include",
 						"/usr/include/x86_64-linux-gnu",
 						"/usr/include"
 					],
@@ -19,8 +19,11 @@
 					[
 						"/usr/lib/gcc/x86_64-linux-gnu/9",
 						"/usr/lib/x86_64-linux-gnu",
-						"/usr/lib",
+						"/usr/lib64",
 						"/lib/x86_64-linux-gnu",
+						"/lib64",
+						"/usr/lib",
+						"/usr/lib/llvm-10/lib",
 						"/lib"
 					],
 					"linkFrameworkDirectories" : [],
@@ -34,7 +37,7 @@
 					]
 				},
 				"path" : "/usr/bin/cc",
-				"version" : "9.3.0"
+				"version" : "10.0.0"
 			},
 			"language" : "C",
 			"sourceFileExtensions" : 
@@ -46,7 +49,7 @@
 		{
 			"compiler" : 
 			{
-				"id" : "GNU",
+				"id" : "Clang",
 				"implicit" : 
 				{
 					"includeDirectories" : 
@@ -54,8 +57,8 @@
 						"/usr/include/c++/9",
 						"/usr/include/x86_64-linux-gnu/c++/9",
 						"/usr/include/c++/9/backward",
-						"/usr/lib/gcc/x86_64-linux-gnu/9/include",
 						"/usr/local/include",
+						"/usr/lib/llvm-10/lib/clang/10.0.0/include",
 						"/usr/include/x86_64-linux-gnu",
 						"/usr/include"
 					],
@@ -63,8 +66,11 @@
 					[
 						"/usr/lib/gcc/x86_64-linux-gnu/9",
 						"/usr/lib/x86_64-linux-gnu",
-						"/usr/lib",
+						"/usr/lib64",
 						"/lib/x86_64-linux-gnu",
+						"/lib64",
+						"/usr/lib",
+						"/usr/lib/llvm-10/lib",
 						"/lib"
 					],
 					"linkFrameworkDirectories" : [],
@@ -80,7 +86,7 @@
 					]
 				},
 				"path" : "/usr/bin/c++",
-				"version" : "9.3.0"
+				"version" : "10.0.0"
 			},
 			"language" : "CXX",
 			"sourceFileExtensions" : 

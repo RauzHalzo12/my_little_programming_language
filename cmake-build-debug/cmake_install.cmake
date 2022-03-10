@@ -1,4 +1,4 @@
-# Install script for directory: /home/ortur/dsl
+# Install script for directory: /home/ortur/CLionProjects/my_little_programming_language
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -44,12 +44,12 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/ortur/dsl/cmake-build-debug/build/compiler/cmake_install.cmake")
+  include("/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/build/compiler/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/ortur/dsl/cmake-build-debug/build/tests/cmake_install.cmake")
+  include("/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/build/tests/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -60,5 +60,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/ortur/dsl/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

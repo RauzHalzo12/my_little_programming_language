@@ -7,8 +7,10 @@
 
 using namespace std;
 
-deque<TokenPtr> SplitLineIntoTokens(const string& line, const grammar::Rules& rules) {
-    deque<TokenPtr> result;
+vector<TokenPtr> SplitLineIntoTokens(const string& line, const grammar::Rules& rules) {
+
+    vector<TokenPtr> result;
+    result.reserve(16);
 
     TokenRecognizer recognizer(rules);
 
@@ -50,7 +52,7 @@ deque<TokenPtr> SplitLineIntoTokens(const string& line, const grammar::Rules& ru
                     }
 
                     if (final_descision != TokenType::UNDEFINED && final_descision != TokenType::SEPARATOR) {
-                        result.push_back(move(MakeToken(final_descision, subs)));
+                        result.push_back(move(MakeToken(final_descision, move(subs))));
                     }
 
                     l = r;
@@ -67,13 +69,21 @@ deque<TokenPtr> SplitLineIntoTokens(const string& line, const grammar::Rules& ru
 }
 
 
-deque<TokenPtr> SplitTextIntoTokens(istream& in, const grammar::Rules& rules) {
-    deque<TokenPtr> result;
+vector<TokenPtr> SplitTextIntoTokens(istream& in, const grammar::Rules& rules) {
+    vector<TokenPtr> result;
 
+    result.reserve(100);
+    int line_number = 1;
     for (string line; getline(in, line);) {
-        for (auto& token : SplitLineIntoTokens(line, rules)) {
-            result.push_back(move(token));
-        }
+            try {
+                for (auto& token : SplitLineIntoTokens(line, rules)) {
+                    result.push_back(move(token));
+                }
+                line_number++;
+            } catch (std::exception& e) {
+                cerr << "ERROR ON LINE: " << line_number << " " << e.what() << endl;
+            }
+
     }
 
     return result;

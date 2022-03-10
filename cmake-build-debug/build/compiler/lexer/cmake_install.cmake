@@ -1,4 +1,4 @@
-# Install script for directory: /home/ortur/dsl/compiler/lexer
+# Install script for directory: /home/ortur/CLionProjects/my_little_programming_language/compiler/lexer
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

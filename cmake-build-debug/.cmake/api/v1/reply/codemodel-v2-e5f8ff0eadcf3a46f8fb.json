@@ -1,0 +1,264 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						4
+					],
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.21"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				},
+				{
+					"build" : "build/compiler",
+					"childIndexes" : 
+					[
+						2,
+						3
+					],
+					"jsonFile" : "directory-build.compiler-Debug-232a18e7416130419696.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.21"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "compiler",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "build/compiler/token",
+					"jsonFile" : "directory-build.compiler.token-Debug-7175d453741ecb6228a2.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.21"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 2,
+					"source" : "compiler/token",
+					"targetIndexes" : 
+					[
+						4
+					]
+				},
+				{
+					"build" : "build/compiler/lexer",
+					"jsonFile" : "directory-build.compiler.lexer-Debug-2c7ee4de2caba13a9c27.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.21"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 3,
+					"source" : "compiler/lexer",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"build" : "build/tests",
+					"childIndexes" : 
+					[
+						5,
+						6
+					],
+					"jsonFile" : "directory-build.tests-Debug-5a930ae16fe83c26cbc5.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.21"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 4,
+					"source" : "tests"
+				},
+				{
+					"build" : "build/tests/test_lexer",
+					"jsonFile" : "directory-build.tests.test_lexer-Debug-56ba6706d866bd29c0fd.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.21"
+					},
+					"parentIndex" : 4,
+					"projectIndex" : 5,
+					"source" : "tests/test_lexer",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "build/tests/test_token",
+					"jsonFile" : "directory-build.tests.test_token-Debug-bba26def1934b2190795.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.21"
+					},
+					"parentIndex" : 4,
+					"projectIndex" : 6,
+					"source" : "tests/test_token",
+					"targetIndexes" : 
+					[
+						3
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1,
+						4
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "MY_LITTLE_PROGRAMMING_LANGUAGE"
+				},
+				{
+					"childIndexes" : 
+					[
+						2,
+						3
+					],
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "compiler",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2
+					],
+					"name" : "token",
+					"parentIndex" : 1,
+					"targetIndexes" : 
+					[
+						4
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						3
+					],
+					"name" : "lexer",
+					"parentIndex" : 1,
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"childIndexes" : 
+					[
+						5,
+						6
+					],
+					"directoryIndexes" : 
+					[
+						4
+					],
+					"name" : "compiler_tests",
+					"parentIndex" : 0
+				},
+				{
+					"directoryIndexes" : 
+					[
+						5
+					],
+					"name" : "test_lexer",
+					"parentIndex" : 4,
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						6
+					],
+					"name" : "test_token",
+					"parentIndex" : 4,
+					"targetIndexes" : 
+					[
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "compiler::@c30e0ab8ca2a9fc4a67b",
+					"jsonFile" : "target-compiler-Debug-49e96653441f9115d395.json",
+					"name" : "compiler",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "lexer::@b31f9cc066dc5d55fee7",
+					"jsonFile" : "target-lexer-Debug-1f4524850f6cef1915ca.json",
+					"name" : "lexer",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "test_lexer::@f93a2582f68776b03a6a",
+					"jsonFile" : "target-test_lexer-Debug-b740259fbf8cedf12531.json",
+					"name" : "test_lexer",
+					"projectIndex" : 5
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "test_token::@cb26eeb1a083648095d9",
+					"jsonFile" : "target-test_token-Debug-5f0936f088879089e1df.json",
+					"name" : "test_token",
+					"projectIndex" : 6
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "token::@4fdc937e48681fd4fb5d",
+					"jsonFile" : "target-token-Debug-4ea106998eb4da1ffcb0.json",
+					"name" : "token",
+					"projectIndex" : 2
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug",
+		"source" : "/home/ortur/CLionProjects/my_little_programming_language"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

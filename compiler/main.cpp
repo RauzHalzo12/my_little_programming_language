@@ -8,15 +8,35 @@
 #include "lexer.h"
 #include "rules.h"
 
+#include <fstream>
+#include <ctime>
+#include "profile.h"
+
 
 using namespace std;
 
 int main() {
-    stringstream ss;
-    ss << "for int i = 0 i ++ 6889889879789789789789789789789897909889897897897897897897898978998";
-    for (auto& token : SplitTextIntoTokens(ss, grammar::proto_rules) ){
-        cout << token << endl;
+
+    ofstream out("input.txt", ios::app);
+    out.close();
+//    {
+//        LOG_DURATION("LEXICAL ANALYS TIME: ");
+//        for (int i = 0; i < 50; i++) {
+//            ifstream input("input.txt");
+//            SplitTextIntoTokens(input, grammar::proto_rules);
+//            input.close();
+//        }
+//    }
+    LOG_DURATION("TOTAL: ")
+    for (int i = 0; i < 50; i++ ){
+        ifstream input("input.txt");
+        SplitTextIntoTokens(input, grammar::proto_rules);
+        input.close();
     }
+
+
+
+
 
     return 0;
 }

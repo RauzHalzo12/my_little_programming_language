@@ -1,4 +1,4 @@
-# Install script for directory: /home/ortur/dsl/compiler
+# Install script for directory: /home/ortur/CLionProjects/my_little_programming_language/compiler
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -44,11 +44,11 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/ortur/dsl/cmake-build-debug/build/compiler/token/cmake_install.cmake")
+  include("/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/build/compiler/token/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/ortur/dsl/cmake-build-debug/build/compiler/lexer/cmake_install.cmake")
+  include("/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/build/compiler/lexer/cmake_install.cmake")
 endif()
 

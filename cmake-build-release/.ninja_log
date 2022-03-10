@@ -1,0 +1,8 @@
+# ninja log v5
+6489	6610	1646837128983739830	build/compiler/compiler	b481b4651dccd681
+1135	1144	1646837123519672501	build/compiler/token/libtoken.a	fab41acc9fa25d82
+2	5772	1646837128147174048	build/compiler/CMakeFiles/compiler.dir/main.cpp.o	dd3b98d2845e6f65
+3	6475	1646837128847647788	build/compiler/lexer/CMakeFiles/lexer.dir/token_recognizer.cpp.o	fbce058b00f22b53
+6475	6489	1646837128863658618	build/compiler/lexer/liblexer.a	ecd0c765fee4de62
+3	5872	1646837128247241725	build/compiler/lexer/CMakeFiles/lexer.dir/lexer.cpp.o	be1b25ee2af6ee05
+2	1135	1646837123511665744	build/compiler/token/CMakeFiles/token.dir/token.cpp.o	7c81782a89100ce3

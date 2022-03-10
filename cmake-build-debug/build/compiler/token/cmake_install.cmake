@@ -1,4 +1,4 @@
-# Install script for directory: /home/ortur/dsl/compiler/token
+# Install script for directory: /home/ortur/CLionProjects/my_little_programming_language/compiler/token
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

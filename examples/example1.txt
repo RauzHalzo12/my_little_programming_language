@@ -21,14 +21,18 @@ class ClassName {
 
 }
 
-void Main() :
+void Main() {
 	Print("Hello, world!")
 	int a = 4
 	float b = -5.123221321
 	String str = "aoaoaoaoaoaoaoaooaoao"
 
-    for (int i = 0; i < 100; i++) :
+    for (int i = 0; i < 100; i++) {
         Print(i + "\n")
+    }
+
+}
+
 
 
 

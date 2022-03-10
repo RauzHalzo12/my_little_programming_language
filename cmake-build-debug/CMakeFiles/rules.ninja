@@ -118,7 +118,7 @@ rule CXX_EXECUTABLE_LINKER__test_token_Debug
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = /snap/clion/180/bin/cmake/linux/bin/cmake --regenerate-during-build -S/home/ortur/dsl -B/home/ortur/dsl/cmake-build-debug
+  command = /snap/clion/180/bin/cmake/linux/bin/cmake --regenerate-during-build -S/home/ortur/CLionProjects/my_little_programming_language -B/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug
   description = Re-running CMake...
   generator = 1
 

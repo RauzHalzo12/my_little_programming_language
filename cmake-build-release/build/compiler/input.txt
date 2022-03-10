@@ -1,0 +1,22 @@
+load "module_name"
+load "another_module"
+
+void Main() {
+	Print("Hello, world!")
+	int a = 4
+	float b = -5123221321
+	String str = "aoaoaoaoaoaoaoaooaoao"
+	
+    for (int i = 0; i < 100; i++) {
+        Print(i + "n")
+    }
+        a && b
+}
+GUGUGUGUGUGUGUGUHUUHIUIUUY6T5RTYUIOI8765R4TYUIOIUYT
+DTYUIOIUYTRDFYUIOIUYFDGYUIOIUYGF
+POIUYTREWQWERTYUIOPOIHGFGHJKJHB
+HGVGHBVBJNHBVBNBNMJNBJHB
+BNKJHBKJHKJHGHKJHGHKIHGLKJ
+HJHHJKJJYTIKLhihyhljjk,b
+
+
