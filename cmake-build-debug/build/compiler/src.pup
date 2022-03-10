@@ -1,0 +1,34 @@
+var_a
+var_b 2 * (var_a / 5 + 6*7) - 2**5;
+var_c = "hello, world";
+
+print(var_a, var_b, var_c);
+
+var_d = input(int, "var_d» ");
+
+if (var_d > 0)
+{
+print("Positive");
+}
+elif (var_d == 0)
+{
+print("NULL");
+}
+else
+{
+rinpt("Negative");
+}
+
+for (i++ 50) { print(i); }
+for (k 49) { }
+
+j = 50;
+while (j)
+{
+print(j);
+j--;
+}
+njkndgjksbm
+mklvdfmlkbd
+bmfkldzmlb
+"qwertyuiop[];lkjhgfdsazxcvbnm,./?/][[][][][[]||||||||||||||||||||"
