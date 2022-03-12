@@ -17,16 +17,20 @@ using namespace std;
 
 
 int main() {
+    ios_base::sync_with_stdio(false);
     LOG_DURATION("TOTAL:")
-   for (int i = 0; i < 50; i++) {
+
         ifstream source_file("src.pup");
         if (!source_file.is_open()) {
             cerr << "No file!";
         }
-        SplitTextIntoTokens(source_file);
+
+        for (auto& token : SplitTextIntoTokens(source_file)) {
+            cout << token << endl;
+        }
 
         source_file.close();
-    }
+
 
     return 0;
 }

@@ -17,6 +17,7 @@ RecognitionResult TokenRecognizer::TryIdentify(std::string_view lexem) {
             last_matched_ = current_match_;
             current_match_ = rule.type_;
             result = RecognitionResult::HAS_MATCHES;
+            break;
         }
     }
 

@@ -10,14 +10,14 @@
 #include <utility>
 
  enum class TokenType {
-     IDENTIFIER,
-     KEYWORD,
-     SEPARATOR,
-     OPERATOR,
-     NUMBER,
-     STRING_LITERAL,
-     BRACKET,
-     UNDEFINED
+     IDENTIFIER = 0,
+     KEYWORD = 1,
+     SEPARATOR = 2,
+     OPERATOR = 3,
+     NUMBER = 4,
+     STRING_LITERAL = 5,
+     BRACKET = 6,
+     UNDEFINED = 7
  };
 
  class IToken {

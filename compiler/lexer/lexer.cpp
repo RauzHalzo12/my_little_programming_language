@@ -22,19 +22,19 @@ public:
         return *this;
     }
 
-    string GetPrefix(size_t prefix_size) const {
-        return string(data_, prefix_size);
+    [[nodiscard]] string GetPrefix(size_t prefix_size) const {
+        return move(string(data_, prefix_size));
     }
 
-    string ToString() const {
-        return string(data_, size_);
+    [[nodiscard]] string ToString() const {
+        return move(string(data_, size_));
     }
 
-    size_t GetSize() const {
+    [[nodiscard]] size_t GetSize() const {
         return size_;
     }
 
-    bool Empty() const {
+    [[nodiscard]] bool Empty() const {
         return size_ == 0;
     }
 
@@ -57,6 +57,8 @@ private:
 
 vector<TokenPtr> SplitTextIntoTokens(istream& in, const grammar::Rules &rules) {
     vector<TokenPtr> result;
+    result.reserve(1000);
+    ios_base::sync_with_stdio(false);
 
     enum class RecognitionState {
         WAITING_FOR_SUCCESS,
@@ -106,7 +108,7 @@ vector<TokenPtr> SplitTextIntoTokens(istream& in, const grammar::Rules &rules) {
     }
 
 
-    if (!symbols.Empty()) {
+    if (!symbols.Empty() && tr.GetCurrentMatch() != TokenType::UNDEFINED) {
         result.push_back(std::move(
                 MakeToken(
                         tr.GetCurrentMatch(),
