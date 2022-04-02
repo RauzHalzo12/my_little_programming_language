@@ -1,0 +1,39 @@
+TOKENS: 
+
+* <IDENTIFIER> = '[A-Za-z_][A-Za-z0-9_]*'
+
+
+
+////////////////////////////////////////////////////////
+
+
+<lang>                    ->     {<external_declaration>}* 
+
+<external_declaration>    ->      <function_defenition>
+						         | <struct_declaration>
+
+<function_defenition>     ->      <type_specifier> <IDENTIFIER> '(' {<type_specifier> IDENTIFIER}* ')' <compound_statement>						   
+
+
+<compound_statement>      ->     '{' {<statement>}* '}'
+
+
+<type_specifier>          ->     int
+								| string
+								| <struct_specifier>
+
+
+<struct_specifier>        ->    'struct' <IDENTIFIER>
+
+
+<struct_declaration>      ->    <struct_specifier> '{' {<type_specifier> <IDENTIFIER>}+ '}'
+
+
+<statement>				  ->    <compound_statement>
+								| 
+
+
+
+
+/////////////////////////////
+

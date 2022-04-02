@@ -1,0 +1,25 @@
+TOKENS: 
+
+ID = ""
+L_BRACE = "("
+R_BRACE = ")"
+
+
+
+
+lang  ->	{statement}+ 
+
+statement -> iteration_statement
+			 | selection_statement
+			 | expression_statement
+
+
+selection_statement -> if '(' expression ')' statement
+					  | if ( expression ) s
+
+expression_statement -> {expression}?
+
+
+
+
+
