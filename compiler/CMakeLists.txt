@@ -1,28 +1,12 @@
 cmake_minimum_required(VERSION 3.21)
-
-project(compiler)
+project(dsl)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_FLAGS -Ofast)
 
-include_directories(benchmark_libs)
+find_package(Boost COMPONENTS regex REQUIRED)
+include_directories(${Boost_INCLUDE_DIR})
 
-add_subdirectory(token)
-include_directories(token)
+add_executable(dsl main.cpp token.h token.cpp)
 
-add_subdirectory(lexer)
-include_directories(lexer)
-
-set(
-        SOURCES
-        main.cpp
-)
-
-set(
-        HEADERS
-)
-
-add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
-
-target_link_libraries(${PROJECT_NAME} token)
-target_link_libraries(${PROJECT_NAME} lexer)
+target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES})

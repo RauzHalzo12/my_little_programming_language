@@ -1,4 +1,4 @@
-# Install script for directory: /home/ortur/dsl/compiler
+# Install script for directory: /home/ortur/CLionProjects/my_little_programming_language/compiler
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,14 @@ endif()
 # Set default install directory permissions.
 if(NOT DEFINED CMAKE_OBJDUMP)
   set(CMAKE_OBJDUMP "/usr/bin/objdump")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for each subdirectory.
+  include("/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/compiler/token/cmake_install.cmake")
+  include("/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/compiler/lexer/cmake_install.cmake")
+  include("/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/compiler/parser/cmake_install.cmake")
+  include("/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/compiler/ast/cmake_install.cmake")
+
 endif()
 
