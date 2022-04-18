@@ -1,5 +1,5 @@
-/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/CMakeFiles/rebuild_cache.dir
 /home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/build/compiler/CMakeFiles/rebuild_cache.dir
-/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/build/compiler/CMakeFiles/edit_cache.dir
+/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/CMakeFiles/rebuild_cache.dir
 /home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/build/compiler/CMakeFiles/dsl.dir
+/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/build/compiler/CMakeFiles/edit_cache.dir
+/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/build/compiler/CMakeFiles/rebuild_cache.dir

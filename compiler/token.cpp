@@ -6,8 +6,9 @@
 #include <string>
 #include <iostream>
 
-#include <boost/regex.hpp>
 
+#include <boost/regex.hpp>
+#include <boost/regex/icu.hpp>
 
 
 bool IsKeyword(const std::string_view &lexem) {
@@ -66,7 +67,7 @@ std::optional<Token::Type> GetTokenType(std::string_view lexem) {
 }
 
 
-std::optional<Token> GetNextToken(std::string_view& str) {
+std::optional<Token> GetNextToken(std::string_view &str) {
 
     enum class State {
         WAITING_FOR_SUCCESS,
@@ -87,14 +88,12 @@ std::optional<Token> GetNextToken(std::string_view& str) {
             last_matched = current_match.value();
         } else {
             if (current_state == State::WAITING_FOR_UNSUCCESS) {
-                Token t(last_matched, str.substr(0, j-1));
-                str.remove_prefix(j-1);
+                Token t(last_matched, str.substr(0, j - 1));
+                //TokenHolder t = MakeToken(last_matched, str.substr(0, j-1));
+                str.remove_prefix(j - 1);
                 return t;
             }
         }
-
-//        std::cout << str.substr(0, j) << std::endl;
-//        auto type = GetTokenType(str.substr(0, j));
 
     }
 
@@ -107,20 +106,83 @@ std::optional<Token> GetNextToken(std::string_view& str) {
     return std::nullopt;
 }
 
+
+
+
 std::vector<Token> SplitIntoTokens(std::string_view text) {
     std::vector<Token> result;
 
     int line_number = 1;
 
+    enum class State {
+        WAITING_FOR_FUNCTION_NAME,
+        DOESNT_WAITING,
+        WAITING_FOR_STRUCT_NAME,
+        WAITING_FOR_FIELD_NAME,
+        WAITING_FOR_VAR_NAME,
+    };
+
+    State current_state = State::DOESNT_WAITING;
+
     do {
         auto token = GetNextToken(text);
+
         if (token.has_value()) {
             if (token.value().type == Token::Type::ENDLINE) {
                 line_number++;
-            } else {
-                if (token.value().type != Token::Type::TAB && token.value().type != Token::Type::SPACE)
-                    result.emplace_back(token.value());
+                continue;
             }
+
+
+            if (current_state == State::DOESNT_WAITING) {
+
+                if (token.value().type == Token::Type::STRUCT_KEYWORD) {
+                    current_state = State::WAITING_FOR_STRUCT_NAME;
+                } else if (token.value().type == Token::Type::FUNC_KEYWORD) {
+                    current_state = State::WAITING_FOR_FUNCTION_NAME;
+                } else if (token.value().type == Token::Type::FIELD_KEYWORD) {
+                    current_state = State::WAITING_FOR_FIELD_NAME;
+                } else if (token.value().type == Token::Type::VAR_KEYWORD) {
+                    current_state = State::WAITING_FOR_VAR_NAME;
+                }
+
+                if (token.value().type != Token::Type::TAB && token.value().type != Token::Type::SPACE) {
+                    token.value().line_number = line_number;
+                    result.emplace_back(token.value());
+                }
+
+
+            } else {
+                if (IsSeparator(token.value().value))
+                    continue;
+
+                if (token.value().type == Token::Type::IDENTIFIER) {
+
+                    if (current_state == State::WAITING_FOR_STRUCT_NAME) {
+                        token.value().type = Token::Type::STRUCT_NAME;
+                    } else if (current_state == State::WAITING_FOR_FUNCTION_NAME) {
+                        token.value().type = Token::Type::FUNC_NAME;
+                    } else if (current_state == State::WAITING_FOR_FIELD_NAME) {
+                        token.value().type = Token::Type::FIELD_NAME;
+                    }  else if (current_state == State::WAITING_FOR_VAR_NAME) {
+                        token.value().type = Token::Type::VAR_NAME;
+                    }
+                    token.value().line_number = line_number;
+                    std::cerr << "DEBUG: " << token.value().line_number << std::endl;
+                    result.push_back(token.value());
+
+                    current_state = State::DOESNT_WAITING;
+
+                } else {
+                    std::cerr << "EXPECTED NAME ON LINE: " << line_number << std::endl;
+                    break;
+                }
+
+
+
+            }
+
+
         } else {
             std::cerr << "Problem on line " << line_number << std::endl;
             break;
@@ -132,6 +194,41 @@ std::vector<Token> SplitIntoTokens(std::string_view text) {
     return result;
 }
 
-std::ostream &operator<<(std::ostream &out, const Token &t) {
-    return out;
+
+TokenStream::TokenStream(const std::vector<Token> &token_sequence)
+        : tokens_(token_sequence) {}
+
+TokenStream::TokenStream(std::vector<Token> &&token_sequence)
+        : tokens_(token_sequence) {}
+
+Token &TokenStream::GetCurrentToken() {
+    return tokens_[curr_idx];
+}
+
+const Token &TokenStream::GetCurrentToken() const {
+    return tokens_[curr_idx];
+}
+
+bool TokenStream::HasNext() const {
+    return curr_idx < tokens_.size();
+}
+
+const Token &TokenStream::GetNextToken() const {
+    return tokens_[curr_idx + 1];
+}
+
+Token &TokenStream::GetNextToken() {
+    return tokens_[curr_idx];
+}
+
+void TokenStream::MoveToNextToken() {
+    curr_idx++;
+}
+
+void TokenStream::MoveToPrevToken() {
+    curr_idx--;
+}
+
+bool TokenStream::HasCurrent() const {
+    return curr_idx < tokens_.size();
 }

@@ -1,0 +1,31 @@
+lang -> assign_expr*
+
+assign_expr -> assignable '=' value_expr;
+
+value_expr  -> lvalue(op value_expr)*
+              | rvalue(op value_expr)*
+              | '('value_expr')'(op value_expr)*
+              ;
+
+rvalue      ->  INT_LITERAL
+                | STRING_LITERAL
+                ;
+
+lvalue      -> VARNAME
+
+assignable  -> lvalue
+              | var_decl
+              ;
+var_decl    -> VAR_KEW VARNAME type
+
+type        -> INT_KEYW
+
+op          -> +
+              |-
+              |*
+              |/
+              ;
+
+
+
+
