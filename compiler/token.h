@@ -19,16 +19,16 @@ struct Token {
     // ТЕРМИНАЛЫ
     enum class Type {
         //KEYWORDS
-        FOR_KEYWORD,
-        WHILE_KEYWORD,
-        STRUCT_KEYWORD,
-        IF_KEYWORD,
-        ELSE_KEYWORD,
-        LOAD_KEYWORD,
-        RETURN_KEYWORD,
-        DO_KEYWORD,
-        FUNC_KEYWORD,
-        FIELD_KEYWORD,
+        //FOR_KEYWORD,
+        //WHILE_KEYWORD,
+        //STRUCT_KEYWORD,
+        //IF_KEYWORD,
+        //ELSE_KEYWORD,
+        //LOAD_KEYWORD,
+        //RETURN_KEYWORD,
+        //DO_KEYWORD,
+        //FUNC_KEYWORD,
+        //FIELD_KEYWORD,
         VAR_KEYWORD,
 
 
@@ -42,12 +42,13 @@ struct Token {
 
         ASSIGN_OPERATOR,
 
-        CURLY_OPEN_BRACE,
+        /*CURLY_OPEN_BRACE,
         CURLY_CLOSE_BRACE,
+         */
         OPEN_PARENTHESIS,
         CLOSE_PARENTHESIS,
-        OPEN_SQUARE_BRACE,
-        CLOSE_SQUARE_BRACE,
+        //OPEN_SQUARE_BRACE,
+        //CLOSE_SQUARE_BRACE,
 
         NUMBER_CONSTANT,
         STRING_CONSTANT,
@@ -61,12 +62,16 @@ struct Token {
         SEMICOLON,
         UNDEFINED,
 
-
+        /*
         STRUCT_NAME,
         FUNC_NAME,
         FIELD_NAME,
+        */
+
         VAR_NAME,
 
+        BASIC_INT,
+        BASIC_STRING,
 
     };
 
@@ -81,21 +86,22 @@ struct Token {
 
 
 
-const boost::regex IDENTIFIER_REGEX       ( R"([_]*[\w][\w\d_]*)");
-const boost::regex STRING_CONSTANT_REGEX  ( R"("(\\.|[^\\"])*")" );
-const boost::regex NUMBER_CONSTANT_REGEX  ( R"([+-]?\d+)"        );
+const std::regex IDENTIFIER_REGEX       ( R"([a-zA-Z_]*)");
+const std::regex STRING_CONSTANT_REGEX  ( R"("(\\.|[^\\"])*")" );
+const std::regex NUMBER_CONSTANT_REGEX  ( R"([-]?\d+)"        );
+
 
 const std::unordered_map<std::string_view, Token::Type> KEYWORDS = {
-        {"for",         Token::Type::FOR_KEYWORD},
-        {"while",       Token::Type::WHILE_KEYWORD},
-        {"if",          Token::Type::IF_KEYWORD},
-        {"else",        Token::Type::ELSE_KEYWORD},
-        {"load",        Token::Type::LOAD_KEYWORD},
-        {"return",      Token::Type::RETURN_KEYWORD},
-        {"do",          Token::Type::DO_KEYWORD},
-        {"struct",      Token::Type::STRUCT_KEYWORD},
-        {"func",        Token::Type::FUNC_KEYWORD},
-        {"field",       Token::Type::FIELD_KEYWORD},
+        //{"for",         Token::Type::FOR_KEYWORD},
+        //{"while",       Token::Type::WHILE_KEYWORD},
+        //{"if",          Token::Type::IF_KEYWORD},
+        //{"else",        Token::Type::ELSE_KEYWORD},
+        //{"load",        Token::Type::LOAD_KEYWORD},
+        //{"return",      Token::Type::RETURN_KEYWORD},
+        //{"do",          Token::Type::DO_KEYWORD},
+        //{"struct",      Token::Type::STRUCT_KEYWORD},
+        //{"func",        Token::Type::FUNC_KEYWORD},
+        //{"field",       Token::Type::FIELD_KEYWORD},
         {"var",         Token::Type::VAR_KEYWORD},
 };
 
@@ -108,22 +114,27 @@ const std::unordered_map<std::string_view, Token::Type> OPERATORS = {
         {".", Token::Type::DOT_OPERATOR},
 };
 
+const std::unordered_map<std::string_view, Token::Type> BASIC_DATA_TYPES = {
+        {"Int", Token::Type::BASIC_INT},
+        {"String", Token::Type::BASIC_STRING},
+};
+
 const std::unordered_map<std::string_view, Token::Type> ASSIGN_OPERATOR = {
         {"=",  Token::Type::ASSIGN_OPERATOR},
-        {"+=", Token::Type::ASSIGN_OPERATOR},
-        {"-=", Token::Type::ASSIGN_OPERATOR},
-        {"*=", Token::Type::ASSIGN_OPERATOR},
-        {"/=", Token::Type::ASSIGN_OPERATOR},
-        {"%=", Token::Type::ASSIGN_OPERATOR},
+       //{"+=", Token::Type::ASSIGN_OPERATOR},
+       //{"-=", Token::Type::ASSIGN_OPERATOR},
+       //{"*=", Token::Type::ASSIGN_OPERATOR},
+       //{"/=", Token::Type::ASSIGN_OPERATOR},
+       //{"%=", Token::Type::ASSIGN_OPERATOR},
 };
 
 const std::unordered_map<std::string_view, Token::Type> BRACES = {
         {"(",  Token::Type::OPEN_PARENTHESIS},
         {")",  Token::Type::CLOSE_PARENTHESIS},
-        {"{",  Token::Type::CURLY_OPEN_BRACE},
-        {"}",  Token::Type::CURLY_CLOSE_BRACE},
-        {"[",  Token::Type::OPEN_SQUARE_BRACE},
-        {"]",  Token::Type::CLOSE_SQUARE_BRACE},
+        //{"{",  Token::Type::CURLY_OPEN_BRACE},
+        //{"}",  Token::Type::CURLY_CLOSE_BRACE},
+        //{"[",  Token::Type::OPEN_SQUARE_BRACE},
+        //{"]",  Token::Type::CLOSE_SQUARE_BRACE},
 };
 
 const std::unordered_map<std::string_view, Token::Type> SEPARATORS = {
@@ -143,7 +154,7 @@ bool IsSeparator(const std::string_view& lexem);
 bool IsIdentifier(const std::string_view& lexem);
 bool IsStringConstant(const std::string_view& lexem);
 bool IsNumberConstant(const std::string_view& lexem);
-
+bool IsBasicDataType(const std::string_view& lexem);
 
 std::optional<Token::Type> GetTokenType(std::string_view lexem);
 std::optional<Token> GetNextToken(std::string_view& text);

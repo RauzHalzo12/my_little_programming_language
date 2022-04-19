@@ -31,23 +31,34 @@ bool IsSeparator(const std::string_view &lexem) {
     return SEPARATORS.contains(lexem);
 }
 
+bool IsBasicDataType(const std::string_view &lexem) {
+    return BASIC_DATA_TYPES.contains(lexem);
+}
+
 bool IsIdentifier(const std::string_view &lexem) {
-    return boost::regex_match(std::string(lexem), IDENTIFIER_REGEX);
+    return std::regex_match(std::string(lexem), IDENTIFIER_REGEX);
 }
 
 bool IsStringConstant(const std::string_view &lexem) {
-    return boost::regex_match(std::string(lexem), STRING_CONSTANT_REGEX);
+    return std::regex_match(std::string(lexem), STRING_CONSTANT_REGEX);
 }
 
 bool IsNumberConstant(const std::string_view &lexem) {
-    return boost::regex_match(std::string(lexem), NUMBER_CONSTANT_REGEX);
+    return std::regex_match(std::string(lexem), NUMBER_CONSTANT_REGEX);
 }
 
 
 std::optional<Token::Type> GetTokenType(std::string_view lexem) {
-
-    if (IsKeyword(lexem)) {
+    if (IsBasicDataType(lexem)) {
+        return BASIC_DATA_TYPES.at(lexem);
+    } else if (IsKeyword(lexem)) {
         return KEYWORDS.at(lexem);
+    } else if (IsIdentifier(lexem)) {
+        return Token::Type::IDENTIFIER;
+    } else if (IsStringConstant(lexem)) {
+        return Token::Type::STRING_CONSTANT;
+    } else if (IsNumberConstant(lexem)) {
+        return Token::Type::NUMBER_CONSTANT;
     } else if (IsBrace(lexem)) {
         return BRACES.at(lexem);
     } else if (IsAssignOperator(lexem)) {
@@ -56,14 +67,8 @@ std::optional<Token::Type> GetTokenType(std::string_view lexem) {
         return SEPARATORS.at(lexem);
     } else if (IsOperator(lexem)) {
         return OPERATORS.at(lexem);
-    } else if (IsIdentifier(lexem)) {
-        return Token::Type::IDENTIFIER;
-    } else if (IsStringConstant(lexem)) {
-        return Token::Type::STRING_CONSTANT;
-    } else if (IsNumberConstant(lexem)) {
-        return Token::Type::NUMBER_CONSTANT;
-    }
-    return std::nullopt;
+    } else
+        return std::nullopt;
 }
 
 
@@ -107,8 +112,7 @@ std::optional<Token> GetNextToken(std::string_view &str) {
 }
 
 
-
-
+/*
 std::vector<Token> SplitIntoTokens(std::string_view text) {
     std::vector<Token> result;
 
@@ -125,6 +129,7 @@ std::vector<Token> SplitIntoTokens(std::string_view text) {
     State current_state = State::DOESNT_WAITING;
 
     do {
+
         auto token = GetNextToken(text);
 
         if (token.has_value()) {
@@ -146,6 +151,7 @@ std::vector<Token> SplitIntoTokens(std::string_view text) {
                     current_state = State::WAITING_FOR_VAR_NAME;
                 }
 
+
                 if (token.value().type != Token::Type::TAB && token.value().type != Token::Type::SPACE) {
                     token.value().line_number = line_number;
                     result.emplace_back(token.value());
@@ -155,7 +161,7 @@ std::vector<Token> SplitIntoTokens(std::string_view text) {
             } else {
                 if (IsSeparator(token.value().value))
                     continue;
-
+                /*
                 if (token.value().type == Token::Type::IDENTIFIER) {
 
                     if (current_state == State::WAITING_FOR_STRUCT_NAME) {
@@ -168,7 +174,6 @@ std::vector<Token> SplitIntoTokens(std::string_view text) {
                         token.value().type = Token::Type::VAR_NAME;
                     }
                     token.value().line_number = line_number;
-                    std::cerr << "DEBUG: " << token.value().line_number << std::endl;
                     result.push_back(token.value());
 
                     current_state = State::DOESNT_WAITING;
@@ -177,6 +182,7 @@ std::vector<Token> SplitIntoTokens(std::string_view text) {
                     std::cerr << "EXPECTED NAME ON LINE: " << line_number << std::endl;
                     break;
                 }
+
 
 
 
@@ -193,7 +199,36 @@ std::vector<Token> SplitIntoTokens(std::string_view text) {
 
     return result;
 }
+*/
 
+
+
+std::vector<Token> SplitIntoTokens(std::string_view text) {
+    std::vector<Token> result;
+
+    int line_number = 1;
+
+    while (!text.empty()) {
+        auto token = GetNextToken(text);
+        if (token.has_value()) {
+            if (token.value().type == Token::Type::ENDLINE) {
+                    line_number++;
+                continue;
+            } else {
+                if (token.value().type != Token::Type::TAB && token.value().type != Token::Type::SPACE) {
+                    token.value().line_number = line_number;
+                    result.emplace_back(token.value());
+                }
+            }
+        } else {
+            std::cerr << "Problem on line " << line_number << std::endl;
+            break;
+        }
+    }
+
+
+    return result;
+}
 
 TokenStream::TokenStream(const std::vector<Token> &token_sequence)
         : tokens_(token_sequence) {}
@@ -210,6 +245,10 @@ const Token &TokenStream::GetCurrentToken() const {
 }
 
 bool TokenStream::HasNext() const {
+    return curr_idx <= tokens_.size() - 1;
+}
+
+bool TokenStream::HasCurrent() const {
     return curr_idx < tokens_.size();
 }
 
@@ -229,6 +268,3 @@ void TokenStream::MoveToPrevToken() {
     curr_idx--;
 }
 
-bool TokenStream::HasCurrent() const {
-    return curr_idx < tokens_.size();
-}

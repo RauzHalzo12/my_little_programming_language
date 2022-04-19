@@ -9,13 +9,15 @@
 #include "grammar.h"
 
 
-std::string GetProgrammText(std::istream& input) {
+std::string GetProgrammText(std::istream &input) {
     return {std::istreambuf_iterator<char>(input), std::istreambuf_iterator<char>()};
 }
+
 
 int main() {
 //    std::ofstream out("parser_test.rtr");
 //    out.close();
+
     LOG_DURATION("TOTAL: ")
 
     std::ifstream input("parser_test.rtr");
@@ -26,24 +28,18 @@ int main() {
 
     std::string text = GetProgrammText(input);
     input.close();
-
-    for (auto& token : SplitIntoTokens(text)) {
+    TokenStream stream(SplitIntoTokens(text));
+    for (auto &token: SplitIntoTokens(text)) {
         std::cout << token.value << " " << token.line_number << std::endl;
     }
 
-
-    TokenStream stream(SplitIntoTokens(text));
-
-
-    while (stream.HasCurrent()) {
-        NontermHolder op = std::make_shared<Nonterms::RValue>();
-        op->ParseFrom(stream);
-        std::cout << op->ToString() << std::endl;
-    }
+    NontermHolder lang = MakeNonterm(Nonterminal::Type::LANG);
+    lang->ParseFrom(stream);
+    std::cout << lang->ToString();
 
 
-    //Parser parser(stream);
 
+    //std::cout << std::get<std::string>(jv);
 
 
     return 0;
