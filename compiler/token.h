@@ -86,7 +86,7 @@ struct Token {
 
 
 
-const std::regex IDENTIFIER_REGEX       ( R"([a-zA-Z_]*)");
+const std::regex IDENTIFIER_REGEX       ( R"([a-zA-Z_]+)");
 const std::regex STRING_CONSTANT_REGEX  ( R"("(\\.|[^\\"])*")" );
 const std::regex NUMBER_CONSTANT_REGEX  ( R"([-]?\d+)"        );
 

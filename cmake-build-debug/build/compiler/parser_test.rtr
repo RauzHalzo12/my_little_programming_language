@@ -1,1 +1,3 @@
 var A Int = 21*(A - 5)-(Q + C);
+var B Int = 32;
+A = 74 * A;

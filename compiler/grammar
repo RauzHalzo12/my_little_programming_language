@@ -1,3 +1,22 @@
+Терминалы:
+
+IDENTIFIER        = [a-zA-Z_]+
+STRING_CONSTANT   = (\\.|[^\\"])*
+NUMBER_CONSTANT   = [-]?\d+
+OPEN_PARENTHESIS  = (
+CLOSE_PARENTHESIS = )
+ADD_OPERATOR      = +
+SUB_OPERATOR      = -
+MUL_OPERATOR      = *
+DIV_OPERATOR      = /
+VAR_KEYW          = var
+INT_KEYW          = Int
+SEMICOLON         = ;
+
+===================================================================================================
+
+Нетерминалы:
+
 lang -> assign_expr*
 
 assign_expr -> assignable '=' value_expr;
@@ -8,17 +27,17 @@ value_expr  -> lvalue(op value_expr)*
               ;
 
 
-rvalue      ->  INT_LITERAL
-                | STRING_LITERAL
+rvalue      ->  NUMBER_CONSTANT
+                | STRING_CONSTANT
                 ;
 
-lvalue      -> VARNAME
+lvalue      -> IDENTIFIER
 
 assignable  -> lvalue
               | var_decl
               ;
 
-var_decl    -> VAR_KEW VARNAME type
+var_decl    -> VAR_KEYW IDENTIFIER type
 
 type        -> INT_KEYW
 

@@ -137,7 +137,7 @@ namespace Nonterms {
             };
 
             std::stringstream out;
-            out << "RVALUE NONTERM: TYPE ->" << TYPE_TO_STRING.at(type);
+            out << "RVALUE NONTERM: TYPE ->" << TYPE_TO_STRING.at(type) << "\t";
             switch (type) {
                 case ValType::INT_LITERAL : {
                     out << "VALUE -> " << std::get<int>(value);
@@ -424,17 +424,6 @@ namespace Nonterms {
                         NontermHolder rbrace = MakeNonterm(NtType::OPERATOR);
                         rbrace->ParseFrom(stream);
 
-                        /*
-                        while (top_value->GetType() != Operator::OpType::OPARENTH) {
-                            result.push_back(frames.top());
-                            frames.pop();
-                            if (!frames.empty())
-                                top_value = std::dynamic_pointer_cast<Nonterms::Operator>(frames.top());
-                            else
-                                break;
-                        }
-                        */
-
                         while (
                                 !frames.empty()
                                 && (
@@ -505,7 +494,6 @@ namespace Nonterms {
                     case TokType::SEMICOLON: {
                         while (!frames.empty()) {
                             result.push_back(frames.top());
-                            //std::cerr << "At the END "<< frames.top()->ToString();
                             frames.pop();
                         }
                         stream.MoveToNextToken();
@@ -514,7 +502,6 @@ namespace Nonterms {
                         break;
 
                     default : {
-
                         std::stringstream out;
                         out << "Invalid token: " << stream.GetCurrentToken().value
                             << " on line -> " << stream.GetCurrentToken().line_number << std::endl;

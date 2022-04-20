@@ -35,3 +35,10 @@
 8432	8610	1650373095884652234	build/compiler/dsl	8ae05b9de0e9e921
 6	8279	1650373335864372106	build/compiler/CMakeFiles/dsl.dir/main.cpp.o	496e45d85acc3686
 8279	8473	1650373336060320328	build/compiler/dsl	8ae05b9de0e9e921
+6	9739	1650442566057511223	build/compiler/CMakeFiles/dsl.dir/token.cpp.o	9bdc1ecf5c747045
+6	10518	1650442566765515124	build/compiler/CMakeFiles/dsl.dir/main.cpp.o	496e45d85acc3686
+10518	10862	1650442567205517547	build/compiler/dsl	8ae05b9de0e9e921
+3	8151	1650442959663438689	build/compiler/CMakeFiles/dsl.dir/main.cpp.o	496e45d85acc3686
+8152	8249	1650442959763439131	build/compiler/dsl	8ae05b9de0e9e921
+4	6926	1650443135708191445	build/compiler/CMakeFiles/dsl.dir/main.cpp.o	496e45d85acc3686
+6927	7025	1650443135808191860	build/compiler/dsl	8ae05b9de0e9e921
