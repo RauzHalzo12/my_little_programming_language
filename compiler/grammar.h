@@ -38,10 +38,9 @@ struct Nonterminal {
 
 using NontermHolder = std::shared_ptr<Nonterminal>;
 
+NontermHolder MakeNonterminal(Nonterminal::Type type);
 
-NontermHolder MakeNonterm(Nonterminal::Type type);
-
-namespace Nonterms {
+namespace Nonterminals {
 
     class Operator : public Nonterminal {
     public:
@@ -309,7 +308,6 @@ namespace Nonterms {
         }
 
     private:
-        //std::string var_name;
         LValue value;
         DataType type;
     };
@@ -398,7 +396,7 @@ namespace Nonterms {
 
                     case TokType::NUMBER_CONSTANT:
                     case TokType::STRING_CONSTANT: {
-                        NontermHolder rval = MakeNonterm(NtType::RVALUE);
+                        NontermHolder rval = MakeNonterminal(NtType::RVALUE);
                         rval->ParseFrom(stream);
                         result.push_back(rval);
                     }
@@ -406,14 +404,14 @@ namespace Nonterms {
 
                     case TokType::IDENTIFIER:
                     case TokType::VAR_NAME: {
-                        NontermHolder lval = MakeNonterm(NtType::LVALUE);
+                        NontermHolder lval = MakeNonterminal(NtType::LVALUE);
                         lval->ParseFrom(stream);
                         result.push_back(lval);
                     }
                         break;
 
                     case TokType::OPEN_PARENTHESIS: {
-                        NontermHolder lbrace = MakeNonterm(NtType::OPERATOR);
+                        NontermHolder lbrace = MakeNonterminal(NtType::OPERATOR);
                         lbrace->ParseFrom(stream);
                         frames.push(lbrace);
                     }
@@ -421,7 +419,7 @@ namespace Nonterms {
 
                     case TokType::CLOSE_PARENTHESIS: {
 
-                        NontermHolder rbrace = MakeNonterm(NtType::OPERATOR);
+                        NontermHolder rbrace = MakeNonterminal(NtType::OPERATOR);
                         rbrace->ParseFrom(stream);
 
                         while (
@@ -431,14 +429,14 @@ namespace Nonterms {
                                         Operator::OpType::OPARENTH
                                 )
                                 ) {
-                            std::cerr << frames.top()->ToString() << std::endl;
+                            //std::cerr << frames.top()->ToString() << std::endl;
                             result.push_back(frames.top());
                             frames.pop();
                         }
 
 
                         if (!frames.empty()
-                            && std::dynamic_pointer_cast<Nonterms::Operator>(frames.top())->GetType() ==
+                            && std::dynamic_pointer_cast<Nonterminals::Operator>(frames.top())->GetType() ==
                                Operator::OpType::OPARENTH) {
                             frames.pop();
                         }
@@ -450,7 +448,7 @@ namespace Nonterms {
                     case TokType::MUL_OPERATOR:
                     case TokType::DIV_OPERATOR: {
 
-                        NontermHolder oper = MakeNonterm(NtType::OPERATOR);
+                        NontermHolder oper = MakeNonterminal(NtType::OPERATOR);
                         oper->ParseFrom(stream);
                         frames.push(oper);
                     }
@@ -459,7 +457,7 @@ namespace Nonterms {
                     case TokType::ADD_OPERATOR:
                     case TokType::SUB_OPERATOR: {
 
-                        NontermHolder oper = MakeNonterm(NtType::OPERATOR);
+                        NontermHolder oper = MakeNonterminal(NtType::OPERATOR);
                         oper->ParseFrom(stream);
 
                         if (frames.empty()
@@ -480,7 +478,7 @@ namespace Nonterms {
 
                                     )
                                     ) {
-                                std::cerr << frames.top()->ToString() << std::endl;
+                                //std::cerr << frames.top()->ToString() << std::endl;
                                 result.push_back(frames.top());
                                 frames.pop();
                             }
@@ -583,7 +581,7 @@ namespace Nonterms {
 
         void ParseFrom(TokenStream &stream) override {
             while (stream.HasCurrent()) {
-                NontermHolder expr = MakeNonterm(Nonterminal::Type::ASSIGN_EXPRESSION);
+                NontermHolder expr = MakeNonterminal(Nonterminal::Type::ASSIGN_EXPRESSION);
                 expr->ParseFrom(stream);
                 expressions_.push_back(expr);
 
@@ -595,45 +593,45 @@ namespace Nonterms {
     };
 };
 
-NontermHolder MakeNonterm(Nonterminal::Type type) {
+NontermHolder MakeNonterminal(Nonterminal::Type type) {
     using nt = Nonterminal::Type;
     switch (type) {
         case nt::TYPE_SPECIFIER: {
-            return std::make_shared<Nonterms::DataType>();
+            return std::make_shared<Nonterminals::DataType>();
         }
             break;
         case nt::VAR_DECLARATION: {
-            return std::make_shared<Nonterms::VarDeclaration>();
+            return std::make_shared<Nonterminals::VarDeclaration>();
         }
             break;
 
         case nt::VALUE_EXPRESSION: {
-            return std::make_shared<Nonterms::ValueExpression>();
+            return std::make_shared<Nonterminals::ValueExpression>();
         }
             break;
 
         case nt::LVALUE: {
-            return std::make_shared<Nonterms::LValue>();
+            return std::make_shared<Nonterminals::LValue>();
         }
             break;
         case nt::RVALUE: {
-            return std::make_shared<Nonterms::RValue>();
+            return std::make_shared<Nonterminals::RValue>();
         }
             break;
         case nt::LANG: {
-            return std::make_shared<Nonterms::Lang>();
+            return std::make_shared<Nonterminals::Lang>();
         }
             break;
         case nt::OPERATOR: {
-            return std::make_shared<Nonterms::Operator>();
+            return std::make_shared<Nonterminals::Operator>();
         }
             break;
         case nt::ASSIGNABLE: {
-            return std::make_shared<Nonterms::Assignable>();
+            return std::make_shared<Nonterminals::Assignable>();
         }
             break;
         case nt::ASSIGN_EXPRESSION: {
-            return std::make_shared<Nonterms::AssignExpression>();
+            return std::make_shared<Nonterminals::AssignExpression>();
         }
             break;
 

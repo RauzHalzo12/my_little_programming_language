@@ -20,7 +20,7 @@ public:
     std::ostringstream os;
     os << message
        << std::chrono::duration_cast<std::chrono::microseconds>(dur).count()
-       << " ms" << std::endl;
+       << " microseconds" << std::endl;
     std::cerr << os.str();
   }
 private:

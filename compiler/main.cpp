@@ -7,13 +7,11 @@
 #include "token.h"
 #include "grammar.h"
 
-std::string GetProgrammText(std::istream &input) {
+std::string GetProgramText(std::istream &input) {
     return {std::istreambuf_iterator<char>(input), std::istreambuf_iterator<char>()};
 }
 
 int main() {
-//    std::ofstream out("parser_test.rtr");
-//    out.close();
 
     LOG_DURATION("TOTAL: ")
 
@@ -23,17 +21,18 @@ int main() {
         std::terminate();
     }
 
-    std::string text = GetProgrammText(input);
+    std::string text = GetProgramText(input);
     input.close();
     TokenStream stream(SplitIntoTokens(text));
-    for (auto &token: SplitIntoTokens(text)) {
-        std::cout << token.value << " " << token.line_number << std::endl;
-    }
 
+//    for (auto &token: SplitIntoTokens(text)) {
+//        std::cout << token.value << " " << token.line_number << std::endl;
+//    }
 
-    NontermHolder lang = MakeNonterm(Nonterminal::Type::LANG);
+    NontermHolder lang = MakeNonterminal(Nonterminal::Type::LANG);
     LOG_DURATION("PARSE TIME:")
     lang->ParseFrom(stream);
+
     std::cout << lang->ToString();
 
     return 0;
