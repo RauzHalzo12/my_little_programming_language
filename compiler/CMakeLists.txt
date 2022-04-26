@@ -18,7 +18,7 @@ set(
         HEADERS
         grammar.h
         token.h
-        )
+)
 
 add_executable(${PROJECT_NAME} ${HEADERS} ${SOURCES})
 

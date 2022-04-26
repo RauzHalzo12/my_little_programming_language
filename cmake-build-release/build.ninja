@@ -147,9 +147,15 @@ build build/compiler/rebuild_cache: phony build/compiler/CMakeFiles/rebuild_cach
 
 build cmake_object_order_depends_target_INTERPRETER: phony || build/interpreter/CMakeFiles/INTERPRETER.dir
 
+build build/interpreter/CMakeFiles/INTERPRETER.dir/interpreter.cpp.o: CXX_COMPILER__INTERPRETER_Release /home/ortur/CLionProjects/my_little_programming_language/interpreter/interpreter.cpp || cmake_object_order_depends_target_INTERPRETER
+  DEP_FILE = build/interpreter/CMakeFiles/INTERPRETER.dir/interpreter.cpp.o.d
+  FLAGS = -O3 -DNDEBUG -std=gnu++17
+  OBJECT_DIR = build/interpreter/CMakeFiles/INTERPRETER.dir
+  OBJECT_FILE_DIR = build/interpreter/CMakeFiles/INTERPRETER.dir
+
 build build/interpreter/CMakeFiles/INTERPRETER.dir/main.cpp.o: CXX_COMPILER__INTERPRETER_Release /home/ortur/CLionProjects/my_little_programming_language/interpreter/main.cpp || cmake_object_order_depends_target_INTERPRETER
   DEP_FILE = build/interpreter/CMakeFiles/INTERPRETER.dir/main.cpp.o.d
-  FLAGS = -O3 -DNDEBUG
+  FLAGS = -O3 -DNDEBUG -std=gnu++17
   OBJECT_DIR = build/interpreter/CMakeFiles/INTERPRETER.dir
   OBJECT_FILE_DIR = build/interpreter/CMakeFiles/INTERPRETER.dir
 
@@ -161,7 +167,7 @@ build build/interpreter/CMakeFiles/INTERPRETER.dir/main.cpp.o: CXX_COMPILER__INT
 #############################################
 # Link the executable build/interpreter/INTERPRETER
 
-build build/interpreter/INTERPRETER: CXX_EXECUTABLE_LINKER__INTERPRETER_Release build/interpreter/CMakeFiles/INTERPRETER.dir/main.cpp.o
+build build/interpreter/INTERPRETER: CXX_EXECUTABLE_LINKER__INTERPRETER_Release build/interpreter/CMakeFiles/INTERPRETER.dir/interpreter.cpp.o build/interpreter/CMakeFiles/INTERPRETER.dir/main.cpp.o
   FLAGS = -O3 -DNDEBUG
   OBJECT_DIR = build/interpreter/CMakeFiles/INTERPRETER.dir
   POST_BUILD = :

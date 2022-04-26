@@ -29,6 +29,8 @@ struct Nonterminal {
 
     virtual std::string ToString() const = 0;
 
+    virtual void GenerateRPN(std::ostream &out) const = 0;
+
     virtual void ParseFrom(TokenStream &stream) = 0;
 
     virtual ~Nonterminal() = default;
@@ -116,6 +118,20 @@ namespace Nonterminals {
             return type;
         }
 
+        void GenerateRPN(std::ostream &out) const override {
+
+            switch (type) {
+                case OpType::ADD: {out << "ADD " << std::endl;} break;
+                case OpType::MUL: {out << "MUL " << std::endl;} break;
+                case OpType::DIV: {out << "DIV " << std::endl;} break;
+                case OpType::SUB: {out << "SUB " << std::endl;} break;
+                default: {
+                    return;
+                } break;
+            }
+
+        }
+
     private:
         OpType type;
     };
@@ -176,6 +192,14 @@ namespace Nonterminals {
             stream.MoveToNextToken();
         }
 
+        void GenerateRPN(std::ostream &out) const override {
+            if (std::holds_alternative<int>(value)) {
+                out << "PUSH " << std::get<int>(value) << std::endl;
+            } else {
+                out << "PUSH " << std::get<std::string>(value) << std::endl;
+            }
+        }
+
     private:
         ValType type;
         std::variant<int, std::string> value;
@@ -212,6 +236,14 @@ namespace Nonterminals {
                       << " on line " << current_token.line_number;
                 throw std::runtime_error(error.str());
             }
+        }
+
+        void GenerateRPN(std::ostream &out) const override {
+            out << "PUSH " << name << std::endl;
+        }
+
+        std::string GetName() const {
+            return name;
         }
 
     private:
@@ -267,7 +299,17 @@ namespace Nonterminals {
 
         }
 
+
+        void GenerateRPN(std::ostream &out) const override {
+            static const std::unordered_map<Typename, std::string> TYPE_TO_STRING = {
+                    {Typename::INT,    "Int"},
+                    {Typename::STRING, "String"},
+            };
+            out << TYPE_TO_STRING.at(type);
+        }
+
     private:
+
         Typename type;
     };
 
@@ -307,6 +349,17 @@ namespace Nonterminals {
             }
         }
 
+        void GenerateRPN(std::ostream &out) const override {
+
+            out << "CRT ";
+            out << value.GetName();
+            out << " ";
+            type.GenerateRPN(out);
+            out << std::endl;
+
+            value.GenerateRPN(out);
+        }
+
     private:
         LValue value;
         DataType type;
@@ -314,7 +367,6 @@ namespace Nonterminals {
 
     class Assignable : public Nonterminal {
     public:
-
 
         Assignable()
                 : Nonterminal(Nonterminal::Type::ASSIGNABLE) {}
@@ -363,6 +415,14 @@ namespace Nonterminals {
             }
         }
 
+        void GenerateRPN(std::ostream &out) const override {
+            if (std::holds_alternative<VarDeclaration>(value_)) {
+                std::get<VarDeclaration>(value_).GenerateRPN(out);
+            } else {
+                std::get<LValue>(value_).GenerateRPN(out);
+            }
+        }
+
     private:
         std::variant<LValue, VarDeclaration> value_;
     };
@@ -383,7 +443,7 @@ namespace Nonterminals {
 
         void ParseFrom(TokenStream &stream) override {
 
-            // Алгоритм перевода выражений в ПОЛИЗ
+            // Алгоритм перевода выражений в ПолИЗ
             using TokType = Token::Type;
             using NtType = Nonterminal::Type;
             std::stack<NontermHolder> frames;
@@ -461,8 +521,8 @@ namespace Nonterminals {
                         oper->ParseFrom(stream);
 
                         if (frames.empty()
-                        || std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
-                           Operator::OpType::OPARENTH) {
+                            || std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
+                               Operator::OpType::OPARENTH) {
                             frames.push(oper);
                         } else {
 
@@ -473,7 +533,7 @@ namespace Nonterminals {
                                             Operator::OpType::MUL
                                             || std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
                                                Operator::OpType::DIV
-                                            || std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
+                                            || std::dynamic_pointer_cast<Operator>(frames.top())->GetType() !=
                                                Operator::OpType::OPARENTH
 
                                     )
@@ -512,6 +572,15 @@ namespace Nonterminals {
             }
 
             stream.MoveToNextToken();
+        }
+
+
+        void GenerateRPN(std::ostream &out) const override {
+
+            for (auto &nonterm: result) {
+                nonterm->GenerateRPN(out);
+
+            }
         }
 
     private:
@@ -556,6 +625,13 @@ namespace Nonterminals {
             rhs.ParseFrom(stream);
         }
 
+
+        void GenerateRPN(std::ostream &out) const override {
+            lhs.GenerateRPN(out);
+            rhs.GenerateRPN(out);
+            out << "ASN" << std::endl;
+        }
+
     private:
         Assignable lhs;
         ValueExpression rhs;
@@ -585,6 +661,13 @@ namespace Nonterminals {
                 expr->ParseFrom(stream);
                 expressions_.push_back(expr);
 
+            }
+        }
+
+
+        void GenerateRPN(std::ostream &out) const override {
+            for (const auto &expr: expressions_) {
+                expr->GenerateRPN(out);
             }
         }
 

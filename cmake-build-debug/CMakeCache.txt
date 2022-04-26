@@ -14,6 +14,15 @@
 # EXTERNAL cache entries
 ########################
 
+//Value Computed by CMake
+BYTECODE_BINARY_DIR:STATIC=/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/build/bytecode
+
+//Value Computed by CMake
+BYTECODE_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+BYTECODE_SOURCE_DIR:STATIC=/home/ortur/CLionProjects/my_little_programming_language/bytecode
+
 //The directory containing a CMake configuration file for Boost.
 Boost_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Boost-1.71.0
 

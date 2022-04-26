@@ -13,6 +13,7 @@ std::string GetProgramText(std::istream &input) {
 
 int main() {
 
+    std::ios_base::sync_with_stdio(false);
     LOG_DURATION("TOTAL: ")
 
     std::ifstream input("parser_test.rtr");
@@ -29,11 +30,21 @@ int main() {
 //        std::cout << token.value << " " << token.line_number << std::endl;
 //    }
 
-    NontermHolder lang = MakeNonterminal(Nonterminal::Type::LANG);
-    LOG_DURATION("PARSE TIME:")
-    lang->ParseFrom(stream);
+    std::ofstream output("out.irp");
+    {
+        //LOG_DURATION("Parse time: ");
+        NontermHolder lang = MakeNonterminal(Nonterminal::Type::LANG);
+        lang->ParseFrom(stream);
 
-    std::cout << lang->ToString();
+        {
+            LOG_DURATION("Code generation: ");
+
+            lang->GenerateRPN(output);
+
+        }
+    }
+    output.close();
+    //std::cout << lang->ToString();
 
     return 0;
 }
