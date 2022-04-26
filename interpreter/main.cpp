@@ -1,23 +1,27 @@
 #include <iostream>
-#include "interpreter.h"
-#include "variable.h"
-#include <boost/any.hpp>
-#include <any>
+
 #include <stack>
+
+#include "object.h"
+#include "virtual_machine.h"
+#include "instructions.h"
 
 using namespace std;
 
 int main() {
-    std::stack<std::shared_ptr<BasicValue>> anys;
 
-    anys.push(std::make_shared<BasicInt>(21342));
-    anys.push(std::make_shared<BasicString>("abooba"s));
-    anys.push(std::make_shared<BasicString>("zzzz"s));
+    std::ifstream code("../compiler/out.irp");
+    VirtualMachine vm;
 
-    while (!anys.empty()) {
-        std::cout << anys.top()->ToString() << std::endl;
-        anys.pop();
+    ProcessInstructions(ReadInstructions(code), vm);
+
+    for (auto& [key, val] : vm.GetResults()) {
+        std::cout << key << " - " << val->ToString() << std::endl;
     }
+
+    code.close();
+
+
     return 0;
 }
 

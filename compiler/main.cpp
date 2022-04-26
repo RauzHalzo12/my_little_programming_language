@@ -31,19 +31,17 @@ int main() {
 //    }
 
     std::ofstream output("out.irp");
-    {
-        //LOG_DURATION("Parse time: ");
-        NontermHolder lang = MakeNonterminal(Nonterminal::Type::LANG);
-        lang->ParseFrom(stream);
 
-        {
-            LOG_DURATION("Code generation: ");
+    //LOG_DURATION("Parse time: ");
+    NontermHolder lang = MakeNonterminal(Nonterminal::Type::LANG);
+    lang->ParseFrom(stream);
 
-            lang->GenerateRPN(output);
 
-        }
-    }
+    lang->GenerateRPN(output);
+
     output.close();
+
+
     //std::cout << lang->ToString();
 
     return 0;

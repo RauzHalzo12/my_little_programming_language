@@ -194,9 +194,9 @@ namespace Nonterminals {
 
         void GenerateRPN(std::ostream &out) const override {
             if (std::holds_alternative<int>(value)) {
-                out << "PUSH " << std::get<int>(value) << std::endl;
+                out << "PUSH Int " << std::get<int>(value) << std::endl;
             } else {
-                out << "PUSH " << std::get<std::string>(value) << std::endl;
+                out << "PUSH String " << std::get<std::string>(value) << std::endl;
             }
         }
 
@@ -239,7 +239,7 @@ namespace Nonterminals {
         }
 
         void GenerateRPN(std::ostream &out) const override {
-            out << "PUSH " << name << std::endl;
+            out << "PUSH Var " << name << std::endl;
         }
 
         std::string GetName() const {
