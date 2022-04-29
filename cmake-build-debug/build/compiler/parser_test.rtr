@@ -1,1 +1,3 @@
-var A Int = 2 * -1 + 4*(1 - 1 * ( -1 + 5));
+var B Bool = True && False || 2 < 4 - 100000000000000000000000000000000;
+var A Bool = B || True;
+

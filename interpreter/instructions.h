@@ -4,7 +4,7 @@
 #include <memory>
 
 #include "virtual_machine.h"
-#include "object.h"
+#include "objects/object.h"
 #include "parsers/parsing_stuff.h"
 
 
@@ -21,12 +21,18 @@ struct Instruction {
         SUB,
         ASN,
         CRT,
+        LT,
+        GT,
+        LTOE,
+        GTOE,
+        OR,
+        AND,
+        EQ,
+        NEQ,
         PUSH,
     };
 
     Instruction(Type t) : type(t) {}
-
-    static InstructionHolder Create(Type type);
 
     virtual void ParseFrom(std::string_view& input) = 0;
 
@@ -44,6 +50,16 @@ const std::unordered_map<std::string_view, Instruction::Type> STRING_TO_INSTRUCT
         {"DIV", Instruction::Type::DIV},
         {"MUL", Instruction::Type::MUL},
         {"SUB", Instruction::Type::SUB},
+
+        {"LT", Instruction::Type::LT},
+        {"GT", Instruction::Type::GT},
+        {"LTOE", Instruction::Type::LTOE},
+        {"GTOE", Instruction::Type::GTOE},
+        {"OR", Instruction::Type::OR},
+        {"AND", Instruction::Type::AND},
+        {"EQ", Instruction::Type::EQ},
+        {"NEQ", Instruction::Type::NEQ},
+
         {"CRT", Instruction::Type::CRT},
         {"PUSH", Instruction::Type::PUSH},
 };
@@ -106,6 +122,120 @@ struct DivInstruction : public Instruction {
     }
 };
 
+struct LTInstruction : public Instruction {
+    LTInstruction() : Instruction(Type::LT) {}
+
+    void Process(VirtualMachine &vm) override {
+        const auto &rhs = vm.Top();
+        const auto &lhs = vm.Top();
+        vm.Push(lhs < rhs);
+    }
+
+    void ParseFrom(std::string_view& input) override {
+        return;
+    }
+};
+
+struct GTInstruction : public Instruction {
+    GTInstruction() : Instruction(Type::GT) {}
+
+    void Process(VirtualMachine &vm) override {
+        const auto &rhs = vm.Top();
+        const auto &lhs = vm.Top();
+        vm.Push(lhs > rhs);
+    }
+
+    void ParseFrom(std::string_view& input) override {
+        return;
+    }
+};
+
+struct GTOEInstruction : public Instruction {
+    GTOEInstruction() : Instruction(Type::GTOE) {}
+
+    void Process(VirtualMachine &vm) override {
+        const auto &rhs = vm.Top();
+        const auto &lhs = vm.Top();
+        vm.Push(lhs >= rhs);
+    }
+
+    void ParseFrom(std::string_view& input) override {
+        return;
+    }
+};
+
+
+struct LTOEInstruction : public Instruction {
+    LTOEInstruction() : Instruction(Type::LTOE) {}
+
+    void Process(VirtualMachine &vm) override {
+        const auto &rhs = vm.Top();
+        const auto &lhs = vm.Top();
+        vm.Push(lhs <= rhs);
+    }
+
+    void ParseFrom(std::string_view& input) override {
+        return;
+    }
+};
+
+struct ORInstruction : public Instruction {
+    ORInstruction() : Instruction(Type::OR) {}
+
+    void Process(VirtualMachine &vm) override {
+        const auto &rhs = vm.Top();
+        const auto &lhs = vm.Top();
+        vm.Push(OR(lhs, rhs));
+    }
+
+    void ParseFrom(std::string_view& input) override {
+        return;
+    }
+};
+
+struct ANDInstruction : public Instruction {
+    ANDInstruction() : Instruction(Type::AND) {}
+
+    void Process(VirtualMachine &vm) override {
+        const auto &rhs = vm.Top();
+        const auto &lhs = vm.Top();
+        vm.Push(AND(lhs, rhs));
+    }
+
+    void ParseFrom(std::string_view& input) override {
+        return;
+    }
+};
+
+struct EQInstruction : public Instruction {
+    EQInstruction() : Instruction(Type::EQ) {}
+
+    void Process(VirtualMachine &vm) override {
+        const auto &rhs = vm.Top();
+        const auto &lhs = vm.Top();
+        vm.Push(lhs == rhs);
+    }
+
+    void ParseFrom(std::string_view& input) override {
+        return;
+    }
+};
+
+struct NEQInstruction : public Instruction {
+    NEQInstruction() : Instruction(Type::NEQ) {}
+
+    void Process(VirtualMachine &vm) override {
+        const auto &rhs = vm.Top();
+        const auto &lhs = vm.Top();
+        vm.Push(lhs != rhs);
+    }
+
+    void ParseFrom(std::string_view& input) override {
+        return;
+    }
+};
+
+
 struct CrtInstruction : public Instruction {
     CrtInstruction() : Instruction(Type::CRT) {}
 
@@ -135,9 +265,17 @@ struct PushInstruction : public Instruction {
             switch (obj_type) {
                 case Obj::Type::BASIC_INT: {
                     ObjPtr result = std::make_shared<Int>(
-                            std::atoi(second_token.c_str())
+                           // std::atoi(second_token.c_str())
+                           second_token
                     );
 
+                    vm.Push(result);
+                }
+                    break;
+                case Obj::Type::BASIC_BOOL: {
+                    ObjPtr result = std::make_shared<Bool>(
+                            second_token
+                    );
                     vm.Push(result);
                 }
                     break;
@@ -145,6 +283,7 @@ struct PushInstruction : public Instruction {
 
         } else {
             vm.Push(second_token);
+            //throw std::runtime_error("ERROR IN PUSHING. INVALID_TYPE");
         }
     }
 
@@ -194,6 +333,38 @@ InstructionHolder MakeInstruction(Instruction::Type type) {
             return std::make_unique<AsnInstruction>();
         } break;
 
+        case Instruction::Type::LT: {
+            return std::make_unique<LTInstruction>();
+        } break;
+
+        case Instruction::Type::LTOE: {
+            return std::make_unique<LTOEInstruction>();
+        } break;
+
+        case Instruction::Type::GT: {
+            return std::make_unique<GTInstruction>();
+        } break;
+
+        case Instruction::Type::GTOE: {
+            return std::make_unique<GTOEInstruction>();
+        } break;
+
+        case Instruction::Type::OR: {
+            return std::make_unique<ORInstruction>();
+        } break;
+
+        case Instruction::Type::AND: {
+            return std::make_unique<ANDInstruction>();
+        } break;
+
+        case Instruction::Type::EQ: {
+            return std::make_unique<EQInstruction>();
+        } break;
+
+        case Instruction::Type::NEQ: {
+            return std::make_unique<NEQInstruction>();
+        } break;
+
         case Instruction::Type::PUSH: {
             return std::make_unique<PushInstruction>();
         } break;
@@ -202,6 +373,7 @@ InstructionHolder MakeInstruction(Instruction::Type type) {
             return std::make_unique<CrtInstruction>();
         } break;
     }
+    throw std::runtime_error("NOT IMPLEMENTED INSTRUCTION");
 }
 
 

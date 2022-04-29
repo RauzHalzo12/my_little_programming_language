@@ -161,12 +161,12 @@ build build/interpreter/CMakeFiles/INTERPRETER.dir/virtual_machine.cpp.o: CXX_CO
   OBJECT_DIR = build/interpreter/CMakeFiles/INTERPRETER.dir
   OBJECT_FILE_DIR = build/interpreter/CMakeFiles/INTERPRETER.dir
 
-build build/interpreter/CMakeFiles/INTERPRETER.dir/object.cpp.o: CXX_COMPILER__INTERPRETER_Release /home/ortur/CLionProjects/my_little_programming_language/interpreter/object.cpp || cmake_object_order_depends_target_INTERPRETER
-  DEP_FILE = build/interpreter/CMakeFiles/INTERPRETER.dir/object.cpp.o.d
+build build/interpreter/CMakeFiles/INTERPRETER.dir/objects/object.cpp.o: CXX_COMPILER__INTERPRETER_Release /home/ortur/CLionProjects/my_little_programming_language/interpreter/objects/object.cpp || cmake_object_order_depends_target_INTERPRETER
+  DEP_FILE = build/interpreter/CMakeFiles/INTERPRETER.dir/objects/object.cpp.o.d
   FLAGS = -O3 -DNDEBUG -std=gnu++2a
   INCLUDES = -I/home/ortur/CLionProjects/my_little_programming_language/interpreter/parsers
   OBJECT_DIR = build/interpreter/CMakeFiles/INTERPRETER.dir
-  OBJECT_FILE_DIR = build/interpreter/CMakeFiles/INTERPRETER.dir
+  OBJECT_FILE_DIR = build/interpreter/CMakeFiles/INTERPRETER.dir/objects
 
 
 # =============================================================================
@@ -176,7 +176,7 @@ build build/interpreter/CMakeFiles/INTERPRETER.dir/object.cpp.o: CXX_COMPILER__I
 #############################################
 # Link the executable build/interpreter/INTERPRETER
 
-build build/interpreter/INTERPRETER: CXX_EXECUTABLE_LINKER__INTERPRETER_Release build/interpreter/CMakeFiles/INTERPRETER.dir/main.cpp.o build/interpreter/CMakeFiles/INTERPRETER.dir/virtual_machine.cpp.o build/interpreter/CMakeFiles/INTERPRETER.dir/object.cpp.o | build/interpreter/parsers/libparsing_stuff.a || build/interpreter/parsers/libparsing_stuff.a
+build build/interpreter/INTERPRETER: CXX_EXECUTABLE_LINKER__INTERPRETER_Release build/interpreter/CMakeFiles/INTERPRETER.dir/main.cpp.o build/interpreter/CMakeFiles/INTERPRETER.dir/virtual_machine.cpp.o build/interpreter/CMakeFiles/INTERPRETER.dir/objects/object.cpp.o | build/interpreter/parsers/libparsing_stuff.a || build/interpreter/parsers/libparsing_stuff.a
   FLAGS = -O3 -DNDEBUG
   LINK_LIBRARIES = build/interpreter/parsers/libparsing_stuff.a
   OBJECT_DIR = build/interpreter/CMakeFiles/INTERPRETER.dir

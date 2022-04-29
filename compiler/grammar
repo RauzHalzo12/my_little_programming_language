@@ -1,51 +1,80 @@
 Терминалы:
 
 IDENTIFIER        = [a-zA-Z_]+
-STRING_CONSTANT   = (\\.|[^\\"])*
+STRING_CONSTANT   = "(\\.|[^\\"])*"
 NUMBER_CONSTANT   = [-]?\d+
 OPEN_PARENTHESIS  = (
 CLOSE_PARENTHESIS = )
+
 ADD_OPERATOR      = +
 SUB_OPERATOR      = -
 MUL_OPERATOR      = *
 DIV_OPERATOR      = /
+
+LT_OPERATOR       = <
+LTOE_OPERATOR     = <=
+GT_OPERATOR       = >
+GTOE_OPERATOR     = >=
+EQ_OPERATOR       = ==
+NEQ_OPERATOR      = !=
+
+AND_OPERATOR      = &&
+OR_OPERATOR       = ||
+
+
 VAR_KEYW          = var
 INT_KEYW          = Int
+BOOL_KEYW         = Bool
 SEMICOLON         = ;
 
 ===================================================================================================
 
 Нетерминалы:
 
-lang -> assign_expr*
+lang        -> assign_expr*
 
-assign_expr -> assignable '=' value_expr;
+assign_expr ->  assignable '=' value_expr;
 
-value_expr  -> lvalue(op value_expr)*
-              | rvalue(op value_expr)*
-              | '('value_expr')'(op value_expr)*
-              ;
+value_expr  ->  value (op value_expr)*
+                | value (op value_expr)*
+                | '('value_expr')'(op value_expr)*
+                ;
 
+value       -> lvalue
+               | rvalue
+               ;
 
 rvalue      ->  NUMBER_CONSTANT
                 | STRING_CONSTANT
+                | TRUE_KEYW
+                | FALSE_KEYW
                 ;
 
 lvalue      -> IDENTIFIER
+               ;
 
 assignable  -> lvalue
-              | var_decl
-              ;
+               | var_decl
+               ;
 
 var_decl    -> VAR_KEYW IDENTIFIER type
+               ;
 
 type        -> INT_KEYW
+               | BOOL_KEYW
+               ;
 
 op          -> +
-              |-
-              |*
-              |/
-              ;
+               | -
+               | *
+               | /
+               | ==
+               | !=
+               | >
+               | >=
+               | <=
+               | <
+               ;
 
 
 

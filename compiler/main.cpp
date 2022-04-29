@@ -13,8 +13,8 @@ std::string GetProgramText(std::istream &input) {
 
 int main() {
 
-    std::ios_base::sync_with_stdio(false);
-    LOG_DURATION("TOTAL: ")
+   // std::ios_base::sync_with_stdio(false);
+   // LOG_DURATION("TOTAL: ")
 
     std::ifstream input("parser_test.rtr");
     if (!input.is_open()) {
@@ -26,9 +26,9 @@ int main() {
     input.close();
     TokenStream stream(SplitIntoTokens(text));
 
-//    for (auto &token: SplitIntoTokens(text)) {
-//        std::cout << token.value << " " << token.line_number << std::endl;
-//    }
+    for (auto &token: SplitIntoTokens(text)) {
+        std::cout << token.value << " " << token.line_number << std::endl;
+    }
 
     std::ofstream output("out.irp");
 
@@ -42,7 +42,7 @@ int main() {
     output.close();
 
 
-    //std::cout << lang->ToString();
+    std::cout << lang->ToString();
 
     return 0;
 }

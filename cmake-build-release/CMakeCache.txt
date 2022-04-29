@@ -253,6 +253,12 @@ MY_LITTLE_PROGRAMMING_LANGUAGE_SOURCE_DIR:STATIC=/home/ortur/CLionProjects/my_li
 //The directory containing a CMake configuration file for boost_headers.
 boost_headers_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/boost_headers-1.71.0
 
+//The directory containing a CMake configuration file for boost_multip.
+boost_multip_DIR:PATH=boost_multip_DIR-NOTFOUND
+
+//The directory containing a CMake configuration file for boost_multiprecision.
+boost_multiprecision_DIR:PATH=boost_multiprecision_DIR-NOTFOUND
+
 //The directory containing a CMake configuration file for boost_regex.
 boost_regex_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/boost_regex-1.71.0
 
@@ -423,7 +429,7 @@ CMAKE_UNAME:INTERNAL=/usr/bin/uname
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 //Details about finding Boost
-FIND_PACKAGE_MESSAGE_DETAILS_Boost:INTERNAL=[/usr/lib/x86_64-linux-gnu/cmake/Boost-1.71.0/BoostConfig.cmake][cfound components: regex ][v1.71.0()]
+FIND_PACKAGE_MESSAGE_DETAILS_Boost:INTERNAL=[/usr/lib/x86_64-linux-gnu/cmake/Boost-1.71.0/BoostConfig.cmake][c ][v1.71.0()]
 //ADVANCED property for variable: boost_headers_DIR
 boost_headers_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: boost_regex_DIR
