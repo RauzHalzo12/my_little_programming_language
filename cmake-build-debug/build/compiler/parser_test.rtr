@@ -1,3 +1,5 @@
-var B Bool = True && False || 2 < 4 - 100000000000000000000000000000000;
-var A Bool = B || True;
+var A LinkedList =;
+var B Iterator = A InsertAfter (32+ 45* 4534 - 43634 == 3);
+var C Iterator = A Get (B Get D Get E);
 
+var M Bool = (A Get B Get V) IsValid && True;

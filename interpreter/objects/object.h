@@ -9,7 +9,7 @@
 
 #include <boost/multiprecision/cpp_int.hpp>
 
-#include "../containers/hash_set.h"
+#include "../containers/linked_list.h"
 
 struct Obj;
 
@@ -19,9 +19,9 @@ struct Obj {
 
     enum class Type {
         BASIC_INT,
-        BASIC_STRING,
         BASIC_BOOL,
-        BASIC_CONTAINER,
+        BASIC_ITERATOR,
+        BASIC_LINKED_LIST,
     };
 
     explicit Obj(Type t) : type(t) {}
@@ -43,6 +43,15 @@ struct Obj {
 
     virtual bool HasOROperator() const = 0;
     virtual bool HasANDOperator() const = 0;
+
+    // Контейнерные штуки:
+    virtual bool HasGETOperator() const = 0;
+    virtual bool HasISVALOperator() const = 0;
+    virtual bool HasHSNXTOperator() const = 0;
+    virtual bool HasHSPRVOperator() const = 0;
+    virtual bool HasINSAOperator() const = 0;
+    virtual bool HasINSBOperator() const = 0;
+    virtual bool HasERSOperator() const = 0;
 
 
     virtual std::size_t Hash() const = 0;
@@ -86,6 +95,14 @@ public:
     bool HasNEQOperator()  const override;
     bool HasOROperator()   const override;
     bool HasANDOperator()  const override;
+
+    bool HasGETOperator()   const override;
+    bool HasISVALOperator() const override;
+    bool HasHSNXTOperator() const override;
+    bool HasHSPRVOperator() const override;
+    bool HasINSAOperator()  const override;
+    bool HasINSBOperator()  const override;
+    bool HasERSOperator()   const override;
 
 
     friend ObjPtr operator+(const ObjPtr& lhs, const ObjPtr& rhs);
@@ -134,6 +151,14 @@ public:
     bool HasOROperator()   const override;
     bool HasANDOperator()  const override;
 
+    bool HasGETOperator()   const override;
+    bool HasISVALOperator() const override;
+    bool HasHSNXTOperator() const override;
+    bool HasHSPRVOperator() const override;
+    bool HasINSAOperator()  const override;
+    bool HasINSBOperator()  const override;
+    bool HasERSOperator()   const override;
+
 
     friend ObjPtr operator<(const ObjPtr& lhs, const ObjPtr& rhs);
     friend ObjPtr operator<=(const ObjPtr& lhs, const ObjPtr& rhs);
@@ -148,10 +173,85 @@ private:
     bool value_;
 };
 
+
+class Iterator : public Obj {
+public:
+    enum class State {
+        IS_VALID,
+        IS_INVALID,
+    };
+
+    bool HasSUMOperator() const override;
+    bool HasDIVOperator() const override;
+    bool HasMULOperator() const override;
+    bool HasSUBOperator() const override;
+
+    std::size_t Hash() const override;
+    std::string ToString() const override;
+
+    void Assign(ObjPtr other) override;
+
+    bool HasLTOperator()   const override;
+    bool HasGTOperator()   const override;
+    bool HasLTOEOperator() const override;
+    bool HasGTOEOperator() const override;
+    bool HasEQOperator()   const override;
+    bool HasNEQOperator()  const override;
+    bool HasOROperator()   const override;
+    bool HasANDOperator()  const override;
+
+    bool HasGETOperator()   const override;
+    bool HasISVALOperator() const override;
+    bool HasHSNXTOperator() const override;
+    bool HasHSPRVOperator() const override;
+    bool HasINSAOperator()  const override;
+    bool HasINSBOperator()  const override;
+    bool HasERSOperator()   const override;
+
+    bicycle::Node<ObjPtr> GetNode() {
+        return value;
+    }
+
+private:
+    bicycle::Node<ObjPtr> value;
+
+};
+
+class LinkedList : public Obj {
+public:
+
+    bool HasSUMOperator() const override;
+    bool HasDIVOperator() const override;
+    bool HasMULOperator() const override;
+    bool HasSUBOperator() const override;
+
+    bool HasLTOperator()   const override;
+    bool HasGTOperator()   const override;
+    bool HasLTOEOperator() const override;
+    bool HasGTOEOperator() const override;
+    bool HasEQOperator()   const override;
+    bool HasNEQOperator()  const override;
+    bool HasOROperator()   const override;
+    bool HasANDOperator()  const override;
+
+    bool HasGETOperator()   const override;
+    bool HasISVALOperator() const override;
+    bool HasHSNXTOperator() const override;
+    bool HasHSPRVOperator() const override;
+    bool HasINSAOperator()  const override;
+    bool HasINSBOperator()  const override;
+    bool HasERSOperator()   const override;
+private:
+    bicycle::LinkedList<ObjPtr> list_;
+};
+
+
+
 ObjPtr MakeObj(Obj::Type type);
 
 std::ostream& operator<<(std::ostream& out, const Int& value);
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 ObjPtr operator/(const ObjPtr& lhs, const ObjPtr& rhs);
 ObjPtr operator+(const ObjPtr& lhs, const ObjPtr& rhs);
 ObjPtr operator-(const ObjPtr& lhs, const ObjPtr& rhs);
@@ -167,6 +267,17 @@ ObjPtr operator!=(const ObjPtr& lhs, const ObjPtr& rhs);
 
 ObjPtr AND(const ObjPtr& lhs, const ObjPtr& rhs);
 ObjPtr OR(const ObjPtr& lhs, const ObjPtr& rhs);
+
+
+ObjPtr GET(const ObjPtr& lhs);
+ObjPtr ISVAL(const ObjPtr& lhs);
+ObjPtr HSNXT(const ObjPtr& lhs);
+ObjPtr HSPRV(const ObjPtr& lhs);
+
+ObjPtr INSA(ObjPtr& lhs, const ObjPtr& rhs);
+ObjPtr INSB(ObjPtr& lhs, const ObjPtr& rhs);
+ObjPtr ERS(ObjPtr& lhs, const ObjPtr& rhs);
+
 
 const std::unordered_map<std::string, Obj::Type> STRING_TO_TYPE = {
         {"Integer",  Obj::Type::BASIC_INT},
